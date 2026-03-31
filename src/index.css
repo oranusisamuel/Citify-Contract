@@ -1,6 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 @import "tailwindcss";
 
+@theme {
+    --color-brand: #058F44;
+    --color-brand-strong: #047335;
+    --color-brand-accent: #9dffcb;
+    --color-brand-deep: #04401f;
+    --color-brand-ink: #032712;
+}
+
 *{
     font-family: Outfit;
 }

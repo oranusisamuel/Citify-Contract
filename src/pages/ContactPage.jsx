@@ -1,17 +1,14 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
 import Contact from '../components/Contact'
-import Footer from '../components/Footer'
+import SitePageLayout from '../components/SitePageLayout'
 
 const ContactPage = () => {
   return (
-    <div className='w-full overflow-hidden'>
-      <Navbar />
-      <div className='pt-20'>
+    <SitePageLayout>
+      <div>
         <Contact />
       </div>
-      <Footer />
-    </div>
+    </SitePageLayout>
   )
 }
 

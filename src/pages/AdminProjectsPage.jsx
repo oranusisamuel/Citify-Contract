@@ -515,12 +515,13 @@ const AdminProjectsPage = () => {
       <header className='fixed top-0 left-0 right-0 z-50 bg-slate-900 shadow-lg'>
         <div className='max-w-7xl mx-auto px-6 h-16 flex items-center justify-between'>
           <div className='flex items-center gap-3'>
-            <div className='w-8 h-8 rounded-lg bg-[#058F44] flex items-center justify-center font-bold text-white text-sm select-none'>C</div>
+            <div className='w-8 h-8 rounded-lg bg-brand flex items-center justify-center font-bold text-white text-sm select-none'>C</div>
             <span className='font-semibold text-white text-lg tracking-tight'>Citify Admin</span>
           </div>
           <nav className='flex items-center gap-1'>
-            <Link to='/admin/properties' className='px-4 py-2 rounded-lg bg-[#058F44] text-white text-sm font-medium'>Properties</Link>
+            <Link to='/admin/properties' className='px-4 py-2 rounded-lg bg-brand text-white text-sm font-medium'>Properties</Link>
             <Link to='/admin/tours' className='px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 text-sm font-medium transition-colors'>Inspections</Link>
+            <Link to='/admin/contacts' className='px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 text-sm font-medium transition-colors'>Contacts</Link>
             <button onClick={onLogout} className='ml-2 px-4 py-2 rounded-lg border border-slate-600 text-slate-300 hover:text-white hover:bg-slate-700 text-sm transition-colors'>Log Out</button>
           </nav>
         </div>
@@ -555,7 +556,7 @@ const AdminProjectsPage = () => {
                     value={listSearch}
                     onChange={(event) => setListSearch(event.target.value)}
                     placeholder='Search by property or location'
-                    className='w-full border border-slate-200 rounded-xl pl-9 pr-3 py-2.5 text-sm focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all'
+                    className='w-full border border-slate-200 rounded-xl pl-9 pr-3 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all'
                   />
                 </div>
 
@@ -572,7 +573,7 @@ const AdminProjectsPage = () => {
                       onClick={() => setListFilter(tab.value)}
                       className={`px-3 py-2 rounded-xl text-xs font-semibold border transition-colors ${
                         listFilter === tab.value
-                          ? 'bg-[#058F44] text-white border-[#058F44]'
+                          ? 'bg-brand text-white border-brand'
                           : 'border-slate-200 text-slate-600 hover:bg-slate-50'
                       }`}
                     >
@@ -605,7 +606,7 @@ const AdminProjectsPage = () => {
                     <div
                       key={project.id}
                       className={`grid grid-cols-1 md:grid-cols-[2.2fr_1fr_1fr_auto] gap-3 px-4 py-3 border-b border-slate-100 last:border-b-0 ${
-                        editingId === project.id ? 'bg-[#058F44]/5' : 'bg-white'
+                        editingId === project.id ? 'bg-brand/5' : 'bg-white'
                       }`}
                     >
                       <div className='flex items-center gap-3 min-w-0'>
@@ -617,7 +618,7 @@ const AdminProjectsPage = () => {
                         <div className='min-w-0'>
                           <p className='text-xs font-semibold text-slate-800 truncate'>{project.title}</p>
                           <p className='text-[11px] text-slate-500 truncate'>{project.location}</p>
-                          <p className='text-[10px] text-[#058F44] font-semibold'>#{project.id}</p>
+                          <p className='text-[10px] text-brand font-semibold'>#{project.id}</p>
                         </div>
                       </div>
 
@@ -627,7 +628,7 @@ const AdminProjectsPage = () => {
                       <div className='flex items-center gap-2 md:justify-end'>
                         <button
                           onClick={() => startEdit(project)}
-                          className='px-2.5 py-1.5 rounded-lg bg-[#058F44] text-white text-[11px] font-medium hover:bg-[#047335] transition-colors'
+                          className='px-2.5 py-1.5 rounded-lg bg-brand text-white text-[11px] font-medium hover:bg-brand-strong transition-colors'
                         >
                           Edit
                         </button>
@@ -656,7 +657,7 @@ const AdminProjectsPage = () => {
                     {editingId ? `Editing Property #${editingId}` : 'Add New Property'}
                   </h2>
                   {editingId && (
-                    <span className='text-[10px] font-semibold uppercase tracking-wider text-[#058F44] bg-[#058F44]/10 px-2 py-1 rounded-full'>Editing</span>
+                    <span className='text-[10px] font-semibold uppercase tracking-wider text-brand bg-brand/10 px-2 py-1 rounded-full'>Editing</span>
                   )}
                 </div>
 
@@ -674,7 +675,7 @@ const AdminProjectsPage = () => {
                         onClick={() => setActiveSection(section.id)}
                         className={`px-3 py-2 rounded-xl text-xs font-semibold transition-colors border ${
                           activeSection === section.id
-                            ? 'bg-[#058F44] text-white border-[#058F44]'
+                            ? 'bg-brand text-white border-brand'
                             : 'border-slate-200 text-slate-600 hover:bg-slate-50'
                         }`}
                       >
@@ -687,7 +688,7 @@ const AdminProjectsPage = () => {
                     <div className='space-y-3'>
                       <div>
                         <label className='text-xs font-medium text-slate-600 mb-1 block'>Listing Type</label>
-                        <select name='listingType' value={form.listingType} onChange={updateField} className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all'>
+                        <select name='listingType' value={form.listingType} onChange={updateField} className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all'>
                           {listingTypeOptions.map((option) => (
                             <option key={option.value} value={option.value}>{option.label}</option>
                           ))}
@@ -695,7 +696,7 @@ const AdminProjectsPage = () => {
                       </div>
                       <div>
                         <label className='text-xs font-medium text-slate-600 mb-1 block'>Title</label>
-                        <input name='title' value={form.title} onChange={updateField} placeholder='e.g. Citify Heights' className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all' />
+                        <input name='title' value={form.title} onChange={updateField} placeholder='e.g. Citify Heights' className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all' />
                         {formErrors.title && <p className='mt-1 text-xs text-red-600'>{formErrors.title}</p>}
                       </div>
                       <label className='inline-flex items-center gap-2 rounded-xl border border-slate-200 px-3 py-2.5 text-sm text-slate-700'>
@@ -704,19 +705,19 @@ const AdminProjectsPage = () => {
                           name='featured'
                           checked={Boolean(form.featured)}
                           onChange={updateField}
-                          className='h-4 w-4 rounded border-slate-300 text-[#058F44] focus:ring-[#058F44]/20'
+                          className='h-4 w-4 rounded border-slate-300 text-brand focus:ring-brand/20'
                         />
                         Mark as Featured Listing
                       </label>
                       <div>
                         <label className='text-xs font-medium text-slate-600 mb-1 block'>Location</label>
-                        <input name='location' value={form.location} onChange={updateField} placeholder='e.g. Abuja, Nigeria' className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all' />
+                        <input name='location' value={form.location} onChange={updateField} placeholder='e.g. Abuja, Nigeria' className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all' />
                         {formErrors.location && <p className='mt-1 text-xs text-red-600'>{formErrors.location}</p>}
                       </div>
                       {form.listingType === 'land' && (
                         <div>
                           <label className='text-xs font-medium text-slate-600 mb-1 block'>Land Plot Setup</label>
-                          <select name='landPlotMode' value={form.landPlotMode} onChange={updateField} className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all'>
+                          <select name='landPlotMode' value={form.landPlotMode} onChange={updateField} className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all'>
                             <option value='single'>Single Plot</option>
                             <option value='multiple'>Multiple Plots</option>
                           </select>
@@ -748,7 +749,7 @@ const AdminProjectsPage = () => {
                                       value={option.size}
                                       onChange={(event) => updatePlotOption(index, 'size', event.target.value)}
                                       placeholder='e.g. 300 sqm'
-                                      className='w-full border border-slate-200 rounded-xl px-3 py-2 text-sm bg-white focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all'
+                                      className='w-full border border-slate-200 rounded-xl px-3 py-2 text-sm bg-white focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all'
                                     />
                                   </div>
                                   <div>
@@ -757,7 +758,7 @@ const AdminProjectsPage = () => {
                                       value={option.price}
                                       onChange={(event) => updatePlotOption(index, 'price', event.target.value)}
                                       placeholder='e.g. 25000000'
-                                      className='w-full border border-slate-200 rounded-xl px-3 py-2 text-sm bg-white focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all'
+                                      className='w-full border border-slate-200 rounded-xl px-3 py-2 text-sm bg-white focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all'
                                     />
                                   </div>
                                   <div>
@@ -766,7 +767,7 @@ const AdminProjectsPage = () => {
                                       value={option.buildingType}
                                       onChange={(event) => updatePlotOption(index, 'buildingType', event.target.value)}
                                       placeholder='building'
-                                      className='w-full border border-slate-200 rounded-xl px-3 py-2 text-sm bg-white focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all'
+                                      className='w-full border border-slate-200 rounded-xl px-3 py-2 text-sm bg-white focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all'
                                     />
                                   </div>
                                   <div>
@@ -774,7 +775,7 @@ const AdminProjectsPage = () => {
                                     <select
                                       value={option.status || 'available'}
                                       onChange={(event) => updatePlotOption(index, 'status', event.target.value)}
-                                      className='w-full border border-slate-200 rounded-xl px-3 py-2 text-sm bg-white focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all'
+                                      className='w-full border border-slate-200 rounded-xl px-3 py-2 text-sm bg-white focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all'
                                     >
                                       {plotStatusOptions.map((statusOption) => (
                                         <option key={statusOption.value} value={statusOption.value}>{statusOption.label}</option>
@@ -787,7 +788,7 @@ const AdminProjectsPage = () => {
                                   <button
                                     type='button'
                                     onClick={() => setPlotOptionFeatured(index)}
-                                    className={`rounded-xl border px-3 py-2 text-xs font-semibold transition-colors ${option.featured ? 'border-[#058F44]/35 bg-[#058F44]/10 text-[#058F44]' : 'border-slate-200 bg-white text-slate-500 hover:bg-slate-50'}`}
+                                    className={`rounded-xl border px-3 py-2 text-xs font-semibold transition-colors ${option.featured ? 'border-brand/35 bg-brand/10 text-brand' : 'border-slate-200 bg-white text-slate-500 hover:bg-slate-50'}`}
                                   >
                                     {option.featured ? 'Best Value Selected' : 'Mark as Best Value'}
                                   </button>
@@ -801,19 +802,19 @@ const AdminProjectsPage = () => {
                         <div className='space-y-3'>
                           <div>
                             <label className='text-xs font-medium text-slate-600 mb-1 block'>Price</label>
-                            <input name='price' value={form.price} onChange={updateField} placeholder='Enter your Price' className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all' />
+                            <input name='price' value={form.price} onChange={updateField} placeholder='Enter your Price' className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all' />
                             {formErrors.price && <p className='mt-1 text-xs text-red-600'>{formErrors.price}</p>}
                           </div>
                           {form.listingType === 'land' && (
                             <>
                               <div>
                                 <label className='text-xs font-medium text-slate-600 mb-1 block'>Building Type</label>
-                                <input name='buildingType' value={form.buildingType} onChange={updateField} placeholder='building' className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all' />
+                                <input name='buildingType' value={form.buildingType} onChange={updateField} placeholder='building' className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all' />
                               </div>
                               <div className='grid grid-cols-1 gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center'>
                                 <div>
                                   <label className='text-xs font-medium text-slate-600 mb-1 block'>Availability Status</label>
-                                  <select name='landOptionStatus' value={form.landOptionStatus} onChange={updateField} className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all'>
+                                  <select name='landOptionStatus' value={form.landOptionStatus} onChange={updateField} className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all'>
                                     {plotStatusOptions.map((statusOption) => (
                                       <option key={statusOption.value} value={statusOption.value}>{statusOption.label}</option>
                                     ))}
@@ -824,7 +825,7 @@ const AdminProjectsPage = () => {
                                     type='checkbox'
                                     checked={Boolean(form.landOptionFeatured)}
                                     onChange={(event) => setForm((prev) => ({ ...prev, landOptionFeatured: event.target.checked }))}
-                                    className='h-4 w-4 rounded border-slate-300 text-[#058F44] focus:ring-[#058F44]/20'
+                                    className='h-4 w-4 rounded border-slate-300 text-brand focus:ring-brand/20'
                                   />
                                   Mark as Best Value
                                 </label>
@@ -838,7 +839,7 @@ const AdminProjectsPage = () => {
 
                   {activeSection === 'media' && (
                     <div>
-                      <label className='flex flex-col items-center justify-center gap-2 border-2 border-dashed border-slate-200 rounded-xl p-5 cursor-pointer hover:border-[#058F44] hover:bg-[#058F44]/5 transition-colors'>
+                      <label className='flex flex-col items-center justify-center gap-2 border-2 border-dashed border-slate-200 rounded-xl p-5 cursor-pointer hover:border-brand hover:bg-brand/5 transition-colors'>
                         <svg className='w-6 h-6 text-slate-300' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={1.5} d='M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z' /></svg>
                         <span className='text-xs text-slate-500 font-medium'>{uploading ? 'Uploading...' : 'Click to upload images'}</span>
                         <input type='file' accept='image/*' multiple onChange={onFileChange} disabled={uploading} className='hidden' />
@@ -851,7 +852,7 @@ const AdminProjectsPage = () => {
                             <div key={`preview-${idx}`} className='relative group rounded-xl overflow-hidden aspect-square'>
                               <img src={img} alt={`preview ${idx + 1}`} className='h-full w-full object-cover' />
                               {idx === 0 && (
-                                <span className='absolute top-1 left-1 text-[9px] uppercase tracking-wide font-bold px-1.5 py-0.5 rounded-md bg-[#058F44] text-white'>Cover</span>
+                                <span className='absolute top-1 left-1 text-[9px] uppercase tracking-wide font-bold px-1.5 py-0.5 rounded-md bg-brand text-white'>Cover</span>
                               )}
                               <button
                                 type='button'
@@ -872,7 +873,7 @@ const AdminProjectsPage = () => {
                       {form.listingType !== 'land' && (
                         <div>
                           <label className='text-xs font-medium text-slate-600 mb-1 block'>Short description</label>
-                          <input name='description' value={form.description} onChange={updateField} placeholder='Brief tagline or summary' className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all' />
+                          <input name='description' value={form.description} onChange={updateField} placeholder='Brief tagline or summary' className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all' />
                         </div>
                       )}
 
@@ -885,16 +886,16 @@ const AdminProjectsPage = () => {
                               onChange={(event) => setLandDetailInput(event.target.value)}
                               onKeyDown={(event) => { if (event.key === 'Enter') { event.preventDefault(); addLandDetail() } }}
                               placeholder='Details'
-                              className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all'
+                              className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all'
                             />
                             <button type='button' onClick={addLandDetail} className='px-3 py-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 text-sm shrink-0 transition-colors'>Add</button>
                           </div>
                           {parseLandDetails(form.details).length > 0 && (
                             <div className='mt-3 flex flex-wrap gap-1.5'>
                               {parseLandDetails(form.details).map((detail) => (
-                                <span key={detail} className='inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#058F44]/10 text-[#058F44] text-xs font-medium border border-[#058F44]/20'>
+                                <span key={detail} className='inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand/10 text-brand text-xs font-medium border border-brand/20'>
                                   {detail}
-                                  <button type='button' onClick={() => removeLandDetail(detail)} className='hover:text-[#047335] text-base leading-none mt-px'>×</button>
+                                  <button type='button' onClick={() => removeLandDetail(detail)} className='hover:text-brand-strong text-base leading-none mt-px'>×</button>
                                 </span>
                               ))}
                             </div>
@@ -903,7 +904,7 @@ const AdminProjectsPage = () => {
                       ) : (
                         <div>
                           <label className='text-xs font-medium text-slate-600 mb-1 block'>Full details</label>
-                          <textarea name='details' value={form.details} onChange={updateField} placeholder='Detailed description...' rows={5} className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 resize-none transition-all' />
+                          <textarea name='details' value={form.details} onChange={updateField} placeholder='Detailed description...' rows={5} className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 resize-none transition-all' />
                         </div>
                       )}
 
@@ -916,16 +917,16 @@ const AdminProjectsPage = () => {
                               onChange={(event) => setFeatureInput(event.target.value)}
                               onKeyDown={(event) => { if (event.key === 'Enter') { event.preventDefault(); addFeature() } }}
                               placeholder='Add feature, press Enter'
-                              className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all'
+                              className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all'
                             />
                             <button type='button' onClick={addFeature} className='px-3 py-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 text-sm shrink-0 transition-colors'>Add</button>
                           </div>
                           {form.features.length > 0 && (
                             <div className='mt-3 flex flex-wrap gap-1.5'>
                               {form.features.map((feature) => (
-                                <span key={feature} className='inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#058F44]/10 text-[#058F44] text-xs font-medium border border-[#058F44]/20'>
+                                <span key={feature} className='inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand/10 text-brand text-xs font-medium border border-brand/20'>
                                   {feature}
-                                  <button type='button' onClick={() => removeFeature(feature)} className='hover:text-[#047335] text-base leading-none mt-px'>×</button>
+                                  <button type='button' onClick={() => removeFeature(feature)} className='hover:text-brand-strong text-base leading-none mt-px'>×</button>
                                 </span>
                               ))}
                             </div>
@@ -940,30 +941,30 @@ const AdminProjectsPage = () => {
                       <div className='grid grid-cols-2 gap-3'>
                         <div>
                           <label className='text-xs font-medium text-slate-600 mb-1 block'>{listingConfig.specificationLabels.area}</label>
-                          <input name='area' value={form.area} onChange={updateField} placeholder={listingConfig.specificationPlaceholders.area} className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all' />
+                          <input name='area' value={form.area} onChange={updateField} placeholder={listingConfig.specificationPlaceholders.area} className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all' />
                         </div>
                         {form.listingType !== 'shop' && (
                           <div>
                             <label className='text-xs font-medium text-slate-600 mb-1 block'>{listingConfig.specificationLabels.units}</label>
-                            <input name='units' value={form.units} onChange={updateField} placeholder={listingConfig.specificationPlaceholders.units} className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all' />
+                            <input name='units' value={form.units} onChange={updateField} placeholder={listingConfig.specificationPlaceholders.units} className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all' />
                           </div>
                         )}
                         <div>
                           <label className='text-xs font-medium text-slate-600 mb-1 block'>{listingConfig.specificationLabels.floors}</label>
                           {(form.listingType === 'shop' || form.listingType === 'land') ? (
-                            <select name='floors' value={form.floors} onChange={updateField} className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all'>
+                            <select name='floors' value={form.floors} onChange={updateField} className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all'>
                               <option value=''>Select payment plan</option>
                               <option value='Available'>Available</option>
                               <option value='Unavailable'>Unavailable</option>
                             </select>
                           ) : (
-                            <input name='floors' value={form.floors} onChange={updateField} placeholder={listingConfig.specificationPlaceholders.floors} className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all' />
+                            <input name='floors' value={form.floors} onChange={updateField} placeholder={listingConfig.specificationPlaceholders.floors} className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all' />
                           )}
                         </div>
                         {form.listingType === 'land' && (
                           <div>
                             <label className='text-xs font-medium text-slate-600 mb-1 block'>{listingConfig.specificationLabels.parking}</label>
-                            <input name='parking' value={form.parking} onChange={updateField} placeholder={listingConfig.specificationPlaceholders.parking} className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all' />
+                            <input name='parking' value={form.parking} onChange={updateField} placeholder={listingConfig.specificationPlaceholders.parking} className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all' />
                           </div>
                         )}
                       </div>
@@ -971,7 +972,7 @@ const AdminProjectsPage = () => {
                       {form.listingType === 'property' && (
                         <div>
                           <label className='text-xs font-medium text-slate-600 mb-1 block'>Payment Plan Availability</label>
-                          <select name='paymentPlan' value={form.paymentPlan} onChange={updateField} className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all'>
+                          <select name='paymentPlan' value={form.paymentPlan} onChange={updateField} className='w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all'>
                             <option value=''>Select option</option>
                             <option value='Available'>Available</option>
                             <option value='Unavailable'>Unavailable</option>
@@ -985,7 +986,7 @@ const AdminProjectsPage = () => {
                     <button
                       type='submit'
                       disabled={submitting}
-                      className='flex-1 py-2.5 rounded-xl bg-[#058F44] text-white text-sm font-semibold hover:bg-[#047335] disabled:opacity-60 transition-colors'
+                      className='flex-1 py-2.5 rounded-xl bg-brand text-white text-sm font-semibold hover:bg-brand-strong disabled:opacity-60 transition-colors'
                     >
                       {submitting ? 'Saving...' : editingId ? 'Save Changes' : 'Add Property'}
                     </button>

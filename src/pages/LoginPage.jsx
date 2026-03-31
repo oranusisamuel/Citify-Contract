@@ -32,7 +32,7 @@ const LoginPage = () => {
     try {
       await signInWithEmailAndPassword(auth, trimmedEmail, password)
       navigate('/admin/properties')
-    } catch (err) {
+    } catch {
       setError('Invalid email or password.')
     } finally {
       setLoading(false)
@@ -64,7 +64,7 @@ const LoginPage = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
               placeholder='admin@example.com'
-              className='w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#058F44]'
+              className='w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand'
             />
           </div>
           <div>
@@ -75,7 +75,7 @@ const LoginPage = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
               placeholder='••••••••'
-              className='w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#058F44]'
+              className='w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand'
             />
           </div>
 
@@ -84,7 +84,7 @@ const LoginPage = () => {
           <button
             type='submit'
             disabled={loading}
-            className='w-full bg-[#058F44] text-white py-2 rounded-lg hover:bg-[#047335] disabled:opacity-60 font-medium'
+            className='w-full bg-brand text-white py-2 rounded-lg hover:bg-brand-strong disabled:opacity-60 font-medium'
           >
             {loading ? 'Signing in...' : 'Sign In'}
           </button>

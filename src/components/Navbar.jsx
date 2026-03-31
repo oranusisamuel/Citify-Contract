@@ -1,22 +1,31 @@
 import React, { useEffect } from 'react'
 import { assets } from '../assets/index'
 import { Link, useLocation } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
 
 const Navbar = () => {
-  const { user } = useAuth()
   const location = useLocation()
-  const [showMobileMenu, setShowMobileMenu] = React.useState(false);
+  const [showMobileMenu, setShowMobileMenu] = React.useState(false)
+
+  const navItems = [
+    { label: 'Home', to: '/', match: (path) => path === '/' },
+    { label: 'About Us', to: '/about', match: (path) => path.startsWith('/about') },
+    { label: 'Events', to: '/events', match: (path) => path.startsWith('/events') },
+    { label: 'Properties', to: '/properties', match: (path) => path.startsWith('/properties') || path.startsWith('/property/') },
+    { label: 'Contact', to: '/contact', match: (path) => path.startsWith('/contact') },
+  ]
+
+  const activeClasses = 'text-brand-accent before:absolute before:-bottom-2 before:left-0 before:h-[2px] before:w-full before:rounded-full before:bg-brand'
+  const inactiveClasses = 'text-white/90 hover:text-white'
 
   useEffect(() => {
     if (showMobileMenu) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden'
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = 'auto'
     }
     return () => {
-      document.body.style.overflow = 'auto';
-    };
+      document.body.style.overflow = 'auto'
+    }
   }, [showMobileMenu])
 
   useEffect(() => {
@@ -37,7 +46,9 @@ const Navbar = () => {
 
   useEffect(() => {
     const onResize = () => {
-      if (window.innerWidth >= 768) setShowMobileMenu(false)
+      if (window.innerWidth >= 768) {
+        setShowMobileMenu(false)
+      }
     }
 
     window.addEventListener('resize', onResize)
@@ -45,82 +56,102 @@ const Navbar = () => {
   }, [])
 
   return (
-    <div className='fixed top-0 left-0 w-full z-60 bg-[#058F44]/85 backdrop-blur-md text-white'>
-        <div className='container mx-auto flex justify-between items-center px-4 py-6 md:px-20 lg:px-32'>
-           <Link to="/"><img src={assets.logo} alt="" /></Link>
-            <ul className='hidden md:flex gap-7 text-white'>
-                <Link to="/" className='cursor-pointer hover:text-gray-400'>Home</Link>
-                <Link to="/about" className='cursor-pointer hover:text-gray-400'>About</Link>
-                <Link to="/properties" className='cursor-pointer hover:text-gray-400'>Properties</Link>
-                <Link to="/contact" className='cursor-pointer hover:text-gray-400'>Contact</Link>
-              {user && <Link to="/admin/properties" className='cursor-pointer hover:text-gray-400'>Admin</Link>}
-            </ul>
-             <Link to='/contact' className='hidden md:block bg-[#058F44] cursor-pointer text-white px-8 py-2 rounded-full'>Book an Appointment</Link>
-             <button
-               type='button'
-               onClick={() => setShowMobileMenu(true)}
-               className='md:hidden p-1 rounded focus:outline-none focus:ring-2 focus:ring-white/70'
-               aria-label='Open navigation menu'
-               aria-expanded={showMobileMenu}
-             >
-               <img src={assets.menu_icon} className='w-7 cursor-pointer' alt='Open menu' />
-             </button>
-        </div>
-        {/* -------------------mobile menu popup------------------- */}
-        <div
-          className={`md:hidden fixed inset-0 z-50 transition-opacity duration-200 ${showMobileMenu ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-          aria-hidden={!showMobileMenu}
-        >
-          <button
-            type='button'
-            className='absolute inset-0 z-0 bg-black/35'
-            onClick={() => setShowMobileMenu(false)}
-            aria-label='Close menu overlay'
-          />
+    <div className='fixed top-0 left-0 w-full z-60 text-white'>
+      <div className='border-b border-brand/35 bg-[#022612]/88 backdrop-blur-md'>
+        <div className='container mx-auto flex items-center justify-between px-4 py-4 md:px-10 lg:px-20'>
+          <Link to='/' className='shrink-0'>
+            <img src={assets.logo} alt='Citify logo' className='h-11 w-auto sm:h-12' />
+          </Link>
 
-          <div className={`absolute top-0 right-0 z-10 h-dvh w-full bg-white text-slate-800 shadow-2xl transform transition-transform duration-250 ease-out ${showMobileMenu ? 'translate-x-0' : 'translate-x-full'}`}>
-            <div className='flex justify-end p-5 border-b border-slate-200'>
-              <button
-                type='button'
-                onClick={() => setShowMobileMenu(false)}
-                className='p-1 rounded focus:outline-none focus:ring-2 focus:ring-[#058F44]/40'
-                aria-label='Close navigation menu'
-              >
-                <img src={assets.cross_icon} className='w-6 cursor-pointer' alt='Close menu' />
-              </button>
-            </div>
-
-            <ul className='flex flex-col gap-2 px-5 py-5'>
-              <li>
-                <Link onClick={() => setShowMobileMenu(false)} to='/' className='block w-full text-left px-4 py-3 rounded-lg hover:bg-slate-100 active:bg-slate-200'>Home</Link>
-              </li>
-              <li>
-                <Link onClick={() => setShowMobileMenu(false)} to='/about' className='block w-full text-left px-4 py-3 rounded-lg hover:bg-slate-100 active:bg-slate-200'>About</Link>
-              </li>
-              <li>
-                <Link onClick={() => setShowMobileMenu(false)} to='/properties' className='block w-full text-left px-4 py-3 rounded-lg hover:bg-slate-100 active:bg-slate-200'>Properties</Link>
-              </li>
-              <li>
-                <Link onClick={() => setShowMobileMenu(false)} to='/contact' className='block w-full text-left px-4 py-3 rounded-lg hover:bg-slate-100 active:bg-slate-200'>Contact</Link>
-              </li>
-              {user && (
-                <li>
-                  <Link onClick={() => setShowMobileMenu(false)} to='/admin/properties' className='block w-full text-left px-4 py-3 rounded-lg hover:bg-slate-100 active:bg-slate-200'>Admin</Link>
+          <ul className='hidden md:flex items-center gap-8 lg:gap-11'>
+            {navItems.map((item) => {
+              const isActive = item.match(location.pathname)
+              return (
+                <li key={item.to}>
+                  <Link
+                    to={item.to}
+                    className={`relative text-[18px] font-semibold tracking-[0.01em] transition-colors duration-200 ${isActive ? activeClasses : inactiveClasses}`}
+                  >
+                    {item.label}
+                  </Link>
                 </li>
-              )}
-            </ul>
+              )
+            })}
+          </ul>
 
-            <div className='px-5 pt-2'>
-              <Link
-                onClick={() => setShowMobileMenu(false)}
-                to='/contact'
-                className='block w-full text-center bg-[#058F44] text-white px-4 py-3 rounded-xl font-medium'
-              >
-                Book an Appointment
-              </Link>
-            </div>
+          <div className='flex items-center gap-3'>
+            <Link
+              to='/contact'
+              className='hidden md:inline-flex items-center rounded-full border border-brand-accent/35 bg-brand/85 px-6 py-2.5 text-sm font-semibold tracking-wide text-white transition-colors hover:bg-brand-strong'
+            >
+              Book an Appointment
+            </Link>
+
+            <button
+              type='button'
+              onClick={() => setShowMobileMenu(true)}
+              className='md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-accent/35 bg-brand/35 focus:outline-none focus:ring-2 focus:ring-brand-accent/80'
+              aria-label='Open navigation menu'
+              aria-expanded={showMobileMenu}
+            >
+              <img src={assets.menu_icon} className='w-6' alt='Open menu' />
+            </button>
           </div>
         </div>
+      </div>
+
+      <div
+        className={`md:hidden fixed inset-0 z-50 transition-opacity duration-200 ${showMobileMenu ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+        aria-hidden={!showMobileMenu}
+      >
+        <button
+          type='button'
+          className='absolute inset-0 z-0 bg-slate-950/55'
+          onClick={() => setShowMobileMenu(false)}
+          aria-label='Close menu overlay'
+        />
+
+        <div className={`absolute top-0 right-0 z-10 h-dvh w-[87%] max-w-sm bg-linear-to-b from-[#03331a] to-[#02150b] text-white shadow-2xl transform transition-transform duration-250 ease-out ${showMobileMenu ? 'translate-x-0' : 'translate-x-full'}`}>
+          <div className='flex items-center justify-between px-5 py-5 border-b border-brand-accent/20'>
+            <p className='text-sm tracking-[0.22em] uppercase text-white/70'>Menu</p>
+            <button
+              type='button'
+              onClick={() => setShowMobileMenu(false)}
+              className='p-1 rounded focus:outline-none focus:ring-2 focus:ring-white/40'
+              aria-label='Close navigation menu'
+            >
+              <img src={assets.cross_icon} className='w-6' alt='Close menu' />
+            </button>
+          </div>
+
+          <ul className='flex flex-col gap-1 px-4 py-6'>
+            {navItems.map((item) => {
+              const isActive = item.match(location.pathname)
+              return (
+                <li key={item.to}>
+                  <Link
+                    onClick={() => setShowMobileMenu(false)}
+                    to={item.to}
+                    className={`block w-full rounded-xl px-4 py-3 text-left text-base font-medium transition-colors ${isActive ? 'bg-brand/35 text-brand-accent' : 'text-white/90 hover:bg-white/10 hover:text-white'}`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              )
+            })}
+          </ul>
+
+          <div className='px-4 pt-2'>
+            <Link
+              onClick={() => setShowMobileMenu(false)}
+              to='/contact'
+              className='block w-full rounded-xl bg-brand px-4 py-3 text-center text-sm font-semibold tracking-wide text-white transition-colors hover:bg-brand-strong'
+            >
+              Book an Appointment
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

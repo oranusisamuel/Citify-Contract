@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { Quote } from "lucide-react";
+import { Check, Quote } from "lucide-react";
 import { assets } from "../../assets";
+import LazyImage from '../LazyImage'
 
 const container = {
   hidden: {},
@@ -28,7 +29,9 @@ const slideRight = {
 
 const Block = ({ title, text }) => (
   <motion.div variants={item} className="flex gap-4 items-start">
-    <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center shrink-0" />
+    <div className="w-10 h-10 rounded-full bg-brand flex items-center justify-center shrink-0">
+      <Check size={18} className="text-white" strokeWidth={2.5} />
+    </div>
     <div>
       <h3 className="font-semibold text-lg">{title}</h3>
       <p className="text-gray-500 text-sm mt-1">{text}</p>
@@ -51,7 +54,7 @@ const Aboutsides = () => {
             variants={item}
             className="w-full h-96 rounded-2xl overflow-hidden"
           >
-            <img src={assets.mission_img} alt="Our Mission" className="w-full h-full object-cover" />
+            <LazyImage src={assets.mission_img} alt="Our Mission" className="w-full h-full object-cover" sizes='(max-width: 768px) 100vw, 50vw' />
           </motion.div>
 
           <div className="space-y-8">
@@ -92,7 +95,7 @@ const Aboutsides = () => {
             viewport={{ once: true }}
             className="w-full h-96 rounded-2xl overflow-hidden"
           >
-            <img src={assets.story_img} alt="Our Story" className="w-full h-full object-cover" />
+            <LazyImage src={assets.story_img} alt="Our Story" className="w-full h-full object-cover" sizes='(max-width: 768px) 100vw, 50vw' />
           </motion.div>
         </div>
       </section>

@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { motion } from 'framer-motion'
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
 import { makeFadeUp, makeStaggerContainer, useMotionSettings, viewportOnce } from '../utils/motion'
+import { createContactRequest } from '../utils/contactStore'
 
 const Contact = () => {
      const [result, setResult] = React.useState("");
@@ -45,26 +46,35 @@ const Contact = () => {
       return;
     }
 
-    setResult("Sending....");
+    setResult('Sending...');
 
-    formData.append("access_key", "39b3e6de-e385-4b3a-92b9-44f8298021b9");
+        try {
+          await createContactRequest({
+            name,
+            email,
+            message,
+            source: 'contact-page',
+          })
 
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      body: formData
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      setResult("Form Submitted Successfully");
-      toast.success("Form Submitted Successfully");
-      event.target.reset();
-    } else {
-      console.log("Error", data);
-      toast.error(data.message)
-      setResult("");
-    }
+          toast.success('Form Submitted Successfully');
+          setResult('Form Submitted Successfully');
+          event.target.reset();
+          setConsent(false);
+          setContactError('');
+          setTimeout(() => {
+            setResult('');
+          }, 2500)
+        } catch (error) {
+          console.error('Contact form submit error:', error);
+          if (!navigator.onLine) {
+            setContactError("You're offline.");
+            toast.error("You're offline.");
+          } else {
+            setContactError('Unable to submit right now. Please try again shortly.');
+            toast.error('Unable to submit right now. Please try again shortly.');
+          }
+          setResult('');
+        }
     };
   return (
     <section className='p-6 py-20 lg:px-32 w-full overflow-hidden bg-[radial-gradient(circle_at_top,#d4f1e4,#eaf8f2_45%,#ffffff_85%)]' id='Contact'>
@@ -76,7 +86,7 @@ const Contact = () => {
         variants={fadeUp}
       >
         <div className='text-center mb-12'>
-          <h1 className='text-3xl sm:text-5xl font-bold text-slate-900'>Let's Build Something <span className='text-[#058F44]'>Remarkable</span></h1>
+          <h1 className='text-3xl sm:text-5xl font-bold text-slate-900'>Let's Build Something <span className='text-brand'>Remarkable</span></h1>
           <p className='text-slate-600 mt-3 max-w-2xl mx-auto'>Share your land interest, timeline, and acquisition goals. Our team will get back with a tailored solution for your property needs.</p>
         </div>
 
@@ -88,17 +98,17 @@ const Contact = () => {
           viewport={viewportOnce}
         >
           <motion.div variants={fadeUp} className='lg:col-span-2 rounded-3xl bg-slate-900 text-white p-8 shadow-xl'>
-            <p className='text-xs uppercase tracking-[0.2em] text-[#058F44]/70 font-semibold'>Direct line</p>
+            <p className='text-xs uppercase tracking-[0.2em] text-brand/70 font-semibold'>Direct line</p>
             <h2 className='text-2xl font-semibold mt-2'>Speak with our planning team</h2>
             <p className='text-slate-300 mt-4 leading-relaxed'>From prime residential land to commercial plots, we guide you from first consultation to acquisition completion.</p>
 
             <div className='mt-8 space-y-4 text-sm'>
               <div className='rounded-xl bg-white/10 border border-white/15 p-4'>
-                <p className='text-[#058F44]/60 uppercase text-[10px] tracking-widest'>Office Hours</p>
+                <p className='text-brand/60 uppercase text-[10px] tracking-widest'>Office Hours</p>
                 <p className='mt-1 font-medium'>Mon - Fri, 10:00 AM - 5:00 PM</p>
               </div>
               <div className='rounded-xl bg-white/10 border border-white/15 p-4'>
-                <p className='text-[#058F44]/60 uppercase text-[10px] tracking-widest'>Response Time</p>
+                <p className='text-brand/60 uppercase text-[10px] tracking-widest'>Response Time</p>
                 <p className='mt-1 font-medium'>Usually within 1 business day</p>
               </div>
             </div>
@@ -128,7 +138,7 @@ const Contact = () => {
                 <div>
                   <label className='text-sm font-medium text-slate-700'>Your Name</label>
                   <input
-                    className='w-full border border-slate-300 rounded-xl py-3 px-4 mt-2 focus:outline-none focus:ring-2 focus:ring-[#058F44]/20 focus:border-[#058F44]'
+                    className='w-full border border-slate-300 rounded-xl py-3 px-4 mt-2 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand'
                     type='text'
                     name='Name'
                     placeholder='Your full name'
@@ -138,7 +148,7 @@ const Contact = () => {
                 <div>
                   <label className='text-sm font-medium text-slate-700'>Your Email</label>
                   <input
-                    className='w-full border border-slate-300 rounded-xl py-3 px-4 mt-2 focus:outline-none focus:ring-2 focus:ring-[#058F44]/20 focus:border-[#058F44]'
+                    className='w-full border border-slate-300 rounded-xl py-3 px-4 mt-2 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand'
                     type='email'
                     name='Email'
                     placeholder='Your Email'
@@ -150,7 +160,7 @@ const Contact = () => {
               <div className='mt-5'>
                 <label className='text-sm font-medium text-slate-700'>Message</label>
                 <textarea
-                  className='w-full border border-slate-300 rounded-xl py-3 px-4 mt-2 h-44 resize-none focus:outline-none focus:ring-2 focus:ring-[#058F44]/20 focus:border-[#058F44]'
+                  className='w-full border border-slate-300 rounded-xl py-3 px-4 mt-2 h-44 resize-none focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand'
                   name='Message'
                   placeholder='Enter your message'
                   required
@@ -162,18 +172,18 @@ const Contact = () => {
                   type='checkbox'
                   checked={consent}
                   onChange={(e) => { setConsent(e.target.checked); setContactError(''); }}
-                  className='mt-0.5 w-4 h-4 accent-[#058F44] cursor-pointer shrink-0'
+                  className='mt-0.5 w-4 h-4 accent-brand cursor-pointer shrink-0'
                 />
                 <span className='text-xs text-slate-500 leading-relaxed'>
                   I consent to Citify Contractors collecting and using my details to respond to this enquiry, in accordance with their{' '}
-                  <Link to='/privacy-policy' className='text-[#058F44] underline underline-offset-2 hover:text-[#047335]'>Privacy Policy</Link>.
+                  <Link to='/privacy-policy' className='text-brand underline underline-offset-2 hover:text-brand-strong'>Privacy Policy</Link>.
                 </span>
               </label>
 
               {contactError && <p className='text-sm text-red-600 mt-3'>{contactError}</p>}
 
               <div className='mt-4'>
-                <button disabled={!consent} className='bg-[#058F44] text-white py-3 px-10 rounded-xl font-medium hover:bg-[#047335] transition-colors disabled:opacity-50 disabled:cursor-not-allowed'>
+                <button disabled={!consent} className='bg-brand text-white py-3 px-10 rounded-xl font-medium hover:bg-brand-strong transition-colors disabled:opacity-50 disabled:cursor-not-allowed'>
                   {result ? result : 'Send Message'}
                 </button>
               </div>

@@ -1,4 +1,4 @@
-import { collection, deleteDoc, doc, getDocs, onSnapshot, setDoc, writeBatch } from 'firebase/firestore'
+import { collection, deleteDoc, doc, getDocs, onSnapshot, setDoc } from 'firebase/firestore'
 import { db } from '../firebase'
 import { supabase, supabaseBucket } from '../supabase'
 import { normalizeListingType } from './listingTypes'

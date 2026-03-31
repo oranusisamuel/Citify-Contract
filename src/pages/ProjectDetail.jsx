@@ -9,6 +9,8 @@ import { toast } from 'react-toastify'
 import { seedProjectsIfEmpty, subscribeToProjects } from '../utils/projectsStore'
 import { createTourRequest } from '../utils/toursStore'
 import { getListingTypeConfig } from '../utils/listingTypes'
+import { setDocumentSeo } from '../utils/seo'
+import { COMPANY } from '../utils/siteConfig'
 
 const inspectionTimeSlots = Array.from({ length: 13 }, (_, idx) => {
   const totalMinutes = 10 * 60 + (idx * 30)
@@ -25,12 +27,6 @@ const formatSlotLabel = (time24) => {
   return `${hour12}:${minuteText} ${period}`
 }
 
-const formatInspectionDate = (isoDate) => {
-  if (!isoDate) return ''
-  const dateObj = new Date(`${isoDate}T00:00:00`)
-  return dateObj.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' })
-}
-
 const formatStatusLabel = (status) => {
   const labels = {
     available: 'Available',
@@ -40,11 +36,11 @@ const formatStatusLabel = (status) => {
 }
 
 const getStatusBadgeClass = (status, featured) => {
-  if (featured) return 'border-[#058F44]/25 bg-[#058F44]/10 text-[#058F44]'
+  if (featured) return 'border-brand/25 bg-brand/10 text-brand'
 
   const normalized = String(status || '').toLowerCase()
   if (normalized === 'sold-out' || normalized === 'sold' || normalized === 'reserved') return 'border-red-200 bg-red-50 text-red-600'
-  return 'border-[#058F44]/25 bg-[#058F44]/10 text-[#058F44]'
+  return 'border-brand/25 bg-brand/10 text-brand'
 }
 
 const ProjectDetail = () => {
@@ -109,13 +105,14 @@ const ProjectDetail = () => {
       : project?.image
         ? [project.image]
         : []
+  const primaryGalleryImage = galleryImages[0] || ''
   const listingConfig = getListingTypeConfig(project?.listingType)
   const paymentPlanStatus = project?.listingType === 'property'
     ? (project?.paymentPlan || '')
     : (project?.specifications?.floors || '')
   const showPaymentPlanBadge = paymentPlanStatus === 'Available' || paymentPlanStatus === 'Unavailable'
   const paymentPlanBadgeClass = paymentPlanStatus === 'Available'
-    ? 'bg-[#058F44]/10 text-[#058F44] border-[#058F44]/20'
+    ? 'bg-brand/10 text-brand border-brand/20'
     : 'bg-slate-100 text-slate-600 border-slate-200'
   const isLandListing = project?.listingType === 'land'
   const hasMultipleLandPlots = project?.listingType === 'land' && project?.landPlotMode === 'multiple' && Array.isArray(project?.plotOptions) && project.plotOptions.length > 0
@@ -143,10 +140,31 @@ const ProjectDetail = () => {
   })
 
   useEffect(() => {
-    if (galleryImages.length > 0) {
-      setSelectedImage(galleryImages[0])
+    if (primaryGalleryImage) {
+      setSelectedImage(primaryGalleryImage)
     }
-  }, [project?.id])
+  }, [project?.id, primaryGalleryImage])
+
+  useEffect(() => {
+    if (!project) return
+
+    const seoDescription = [
+      project.location ? `Located in ${project.location}.` : '',
+      project.price ? `Price: ${project.price}.` : '',
+      project.details ? String(project.details).replace(/\|/g, ', ') : '',
+    ]
+      .filter(Boolean)
+      .join(' ')
+
+    setDocumentSeo({
+      title: `${project.title} Property Details`,
+      description: seoDescription || `View detailed property information and request an inspection with ${COMPANY.name}.`,
+      robots: 'index,follow',
+      canonicalPath: `/property/${project.id}`,
+      image: primaryGalleryImage || project.image || '/header_img.png',
+      type: 'article',
+    })
+  }, [project, primaryGalleryImage])
 
   const updateTourField = (event) => {
     const { name, value } = event.target
@@ -230,7 +248,7 @@ const ProjectDetail = () => {
         projectTitle: project.title,
         projectLocation: project.location,
         ...tourForm,
-        date: formatInspectionDate(tourForm.date),
+        date: tourForm.date,
       })
 
       const timeoutPromise = new Promise((_, reject) => {
@@ -279,7 +297,7 @@ const ProjectDetail = () => {
         <Navbar />
         <div className='pt-20 pb-20 text-center'>
           <h1 className='text-2xl font-bold'>Property Not Found</h1>
-          <Link to="/properties" className='mt-6 bg-[#058F44] text-white px-8 py-2 rounded inline-block cursor-pointer'>
+          <Link to="/properties" className='mt-6 bg-brand text-white px-8 py-2 rounded inline-block cursor-pointer'>
             Back
           </Link>
         </div>
@@ -294,7 +312,7 @@ const ProjectDetail = () => {
       <div className='pt-24 pb-20 px-6 md:px-12 lg:px-20'>
         {/* Back Button */}
         <div className='max-w-6xl mx-auto mb-8'>
-          <Link to="/properties" className='flex items-center gap-2 text-[#058F44] hover:text-[#047335] font-medium'>
+          <Link to="/properties" className='flex items-center gap-2 text-brand hover:text-brand-strong font-medium'>
             <ChevronLeft size={20} />
             Back 
           </Link>
@@ -316,7 +334,7 @@ const ProjectDetail = () => {
                     type='button'
                     onClick={() => setSelectedImage(img)}
                     aria-label={`Show image ${idx + 1}`}
-                    className={`shrink-0 w-20 h-20 md:w-full md:h-20 rounded-2xl overflow-hidden border-2 transition-all ${selectedImage === img ? 'border-[#058F44] shadow-[0_0_0_2px_rgba(5,143,68,0.15)]' : 'border-slate-200 hover:border-slate-300'}`}
+                    className={`shrink-0 w-20 h-20 md:w-full md:h-20 rounded-2xl overflow-hidden border-2 transition-all ${selectedImage === img ? 'border-brand shadow-[0_0_0_2px_rgba(5,143,68,0.15)]' : 'border-slate-200 hover:border-slate-300'}`}
                   >
                     <LazyImage
                       src={img}
@@ -367,7 +385,7 @@ const ProjectDetail = () => {
               </div>
               <div>
                 <p className='text-gray-600'>{hasMultipleLandPlots ? 'Starting Price' : 'Price'}</p>
-                <p className='text-xl font-semibold text-[#058F44]'>{project.price}</p>
+                <p className='text-xl font-semibold text-brand'>{project.price}</p>
               </div>
             </div>
           </div>
@@ -384,7 +402,7 @@ const ProjectDetail = () => {
                   const isSoldOut = String(option?.status || '').toLowerCase() === 'sold-out'
 
                   return (
-                  <div key={`plot-option-${idx}`} className={`rounded-2xl border p-5 shadow-sm transition ${isSoldOut ? 'border-slate-200 bg-slate-100/80 opacity-75' : 'border-gray-200 bg-white hover:border-[#058F44]/35 hover:shadow-md'}`}>
+                  <div key={`plot-option-${idx}`} className={`rounded-2xl border p-5 shadow-sm transition ${isSoldOut ? 'border-slate-200 bg-slate-100/80 opacity-75' : 'border-gray-200 bg-white hover:border-brand/35 hover:shadow-md'}`}>
                     <div className='mb-3 flex items-start justify-between gap-3'>
                       <div>
                         <p className='text-xs font-semibold uppercase tracking-[0.16em] text-gray-500'>Plot Size</p>
@@ -399,14 +417,14 @@ const ProjectDetail = () => {
                       <p className='text-gray-600'>
                         <span className='font-medium text-gray-900'>Approved Development:</span> {option.buildingType || 'Not specified'}
                       </p>
-                      <p className='text-[#058F44] text-xl font-semibold'>{option.price}</p>
+                      <p className='text-brand text-xl font-semibold'>{option.price}</p>
                     </div>
 
                     <button
                       type='button'
                       disabled={isSoldOut}
                       onClick={() => onSelectPlotOption(option)}
-                      className={`mt-4 inline-flex items-center justify-center rounded-xl border px-4 py-2.5 text-sm font-semibold transition ${isSoldOut ? 'cursor-not-allowed border-slate-200 bg-slate-200 text-slate-500' : 'border-[#058F44]/30 bg-[#058F44]/8 text-[#058F44] hover:bg-[#058F44] hover:text-white'}`}
+                      className={`mt-4 inline-flex items-center justify-center rounded-xl border px-4 py-2.5 text-sm font-semibold transition ${isSoldOut ? 'cursor-not-allowed border-slate-200 bg-slate-200 text-slate-500' : 'border-brand/30 bg-brand/8 text-brand hover:bg-brand hover:text-white'}`}
                     >
                       {isSoldOut ? 'No longer available' : 'Book inspection for this plot'}
                     </button>
@@ -435,9 +453,9 @@ const ProjectDetail = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: idx * 0.1 }}
-                    className='flex items-center gap-4 p-4 rounded-lg bg-[#058F44]/10'
+                    className='flex items-center gap-4 p-4 rounded-lg bg-brand/10'
                   >
-                    <div className='w-3 h-3 rounded-full bg-[#058F44] shrink-0' />
+                    <div className='w-3 h-3 rounded-full bg-brand shrink-0' />
                     <span className='font-semibold text-gray-900'>{feature}</span>
                   </motion.div>
                 ))}
@@ -460,7 +478,7 @@ const ProjectDetail = () => {
                   <p className='text-gray-600 text-sm uppercase tracking-wide mb-2'>
                     {listingConfig.specificationLabels[key] || key.replace(/([A-Z])/g, ' $1').trim()}
                   </p>
-                  <p className={`text-2xl font-bold ${key === 'floors' && (value === 'Available' || value === 'Unavailable') ? (value === 'Available' ? 'text-[#058F44]' : 'text-slate-600') : 'text-gray-900'}`}>{value}</p>
+                  <p className={`text-2xl font-bold ${key === 'floors' && (value === 'Available' || value === 'Unavailable') ? (value === 'Available' ? 'text-brand' : 'text-slate-600') : 'text-gray-900'}`}>{value}</p>
                 </motion.div>
               ))}
               {project.listingType === 'property' && project.paymentPlan && (
@@ -471,14 +489,14 @@ const ProjectDetail = () => {
                   className='p-6 rounded-lg border border-gray-200 text-center'
                 >
                   <p className='text-gray-600 text-sm uppercase tracking-wide mb-2'>Payment Plan</p>
-                  <p className={`text-2xl font-bold ${project.paymentPlan === 'Available' ? 'text-[#058F44]' : 'text-slate-600'}`}>{project.paymentPlan}</p>
+                  <p className={`text-2xl font-bold ${project.paymentPlan === 'Available' ? 'text-brand' : 'text-slate-600'}`}>{project.paymentPlan}</p>
                 </motion.div>
               )}
             </div>
           </div>
 
           {/* Request Inspection */}
-          <div id='inspection-form' className='rounded-2xl border border-[#058F44]/20 bg-linear-to-r from-[#058F44]/5 to-[#058F44]/10 p-6 md:p-8'>
+          <div id='inspection-form' className='rounded-2xl border border-brand/20 bg-linear-to-r from-brand/5 to-brand/10 p-6 md:p-8'>
             <h3 className='text-2xl font-bold text-gray-900 mb-2'>Request Inspection</h3>
             <p className='text-gray-600 mb-6'>Schedule an inspection and our team will confirm your visit details.</p>
 
@@ -585,7 +603,7 @@ const ProjectDetail = () => {
               </div>
 
               <div className='flex flex-col sm:flex-row sm:items-center gap-3'>
-                <button type='submit' disabled={tourSubmitting || isOffline} className='bg-[#058F44] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#047335] transition disabled:opacity-60'>
+                <button type='submit' disabled={tourSubmitting || isOffline} className='bg-brand text-white px-8 py-3 rounded-lg font-semibold hover:bg-brand-strong transition disabled:opacity-60'>
                   <span className='inline-flex items-center gap-2'>
                     {tourSubmitting && <span className='h-4 w-4 rounded-full border-2 border-white/40 border-t-white animate-spin' />}
                     {isOffline ? "You're offline" : tourSubmitting ? 'Submitting...' : 'Request Inspection'}

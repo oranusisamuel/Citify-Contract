@@ -25,12 +25,6 @@ const formatSlotLabel = (time24) => {
   return `${hour12}:${minuteText} ${period}`
 }
 
-const formatInspectionDate = (isoDate) => {
-  if (!isoDate) return ''
-  const dateObj = new Date(`${isoDate}T00:00:00`)
-  return dateObj.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' })
-}
-
 const ProjectDetail = () => {
   const { id } = useParams()
   const [projects, setProjects] = useState([])
@@ -87,7 +81,7 @@ const ProjectDetail = () => {
     : (project?.specifications?.floors || '')
   const showPaymentPlanBadge = paymentPlanStatus === 'Available' || paymentPlanStatus === 'Unavailable'
   const paymentPlanBadgeClass = paymentPlanStatus === 'Available'
-    ? 'bg-[#058F44]/10 text-[#058F44] border-[#058F44]/20'
+    ? 'bg-brand/10 text-brand border-brand/20'
     : 'bg-slate-100 text-slate-600 border-slate-200'
   const hasMultipleLandPlots = project?.listingType === 'land' && project?.landPlotMode === 'multiple' && Array.isArray(project?.plotOptions) && project.plotOptions.length > 0
   const specificationEntries = Object.entries(project?.specifications || {}).filter(([key]) => {
@@ -170,7 +164,7 @@ const ProjectDetail = () => {
         projectTitle: project.title,
         projectLocation: project.location,
         ...tourForm,
-        date: formatInspectionDate(tourForm.date),
+        date: tourForm.date,
       })
 
       setTourSubmitted(true)
@@ -208,7 +202,7 @@ const ProjectDetail = () => {
         <Navbar />
         <div className='pt-20 pb-20 text-center'>
           <h1 className='text-2xl font-bold'>Property Not Found</h1>
-          <Link to="/properties" className='mt-6 bg-[#058F44] text-white px-8 py-2 rounded inline-block cursor-pointer'>
+          <Link to="/properties" className='mt-6 bg-brand text-white px-8 py-2 rounded inline-block cursor-pointer'>
             Back
           </Link>
         </div>
@@ -223,7 +217,7 @@ const ProjectDetail = () => {
       <div className='pt-24 pb-20 px-6 md:px-12 lg:px-20'>
         {/* Back Button */}
         <div className='max-w-6xl mx-auto mb-8'>
-          <Link to="/properties" className='flex items-center gap-2 text-[#058F44] hover:text-[#047335] font-medium'>
+          <Link to="/properties" className='flex items-center gap-2 text-brand hover:text-brand-strong font-medium'>
             <ChevronLeft size={20} />
             Back 
           </Link>
@@ -245,7 +239,7 @@ const ProjectDetail = () => {
                     type='button'
                     onClick={() => setSelectedImage(img)}
                     aria-label={`Show image ${idx + 1}`}
-                    className={`shrink-0 w-20 h-20 md:w-full md:h-20 rounded-2xl overflow-hidden border-2 transition-all ${selectedImage === img ? 'border-[#058F44] shadow-[0_0_0_2px_rgba(5,143,68,0.15)]' : 'border-slate-200 hover:border-slate-300'}`}
+                    className={`shrink-0 w-20 h-20 md:w-full md:h-20 rounded-2xl overflow-hidden border-2 transition-all ${selectedImage === img ? 'border-brand shadow-[0_0_0_2px_rgba(5,143,68,0.15)]' : 'border-slate-200 hover:border-slate-300'}`}
                   >
                     <LazyImage
                       src={img}
@@ -293,7 +287,7 @@ const ProjectDetail = () => {
               </div>
               <div>
                 <p className='text-gray-600'>{hasMultipleLandPlots ? 'Starting Price' : 'Price'}</p>
-                <p className='text-xl font-semibold text-[#058F44]'>{project.price}</p>
+                <p className='text-xl font-semibold text-brand'>{project.price}</p>
               </div>
             </div>
           </div>
@@ -313,7 +307,7 @@ const ProjectDetail = () => {
                     {project.plotOptions.map((option, idx) => (
                       <tr key={`plot-price-${idx}`} className='border-t border-gray-100'>
                         <td className='px-4 py-3 text-sm font-medium text-gray-800'>{option.size}</td>
-                        <td className='px-4 py-3 text-sm font-semibold text-[#058F44]'>{option.price}</td>
+                        <td className='px-4 py-3 text-sm font-semibold text-brand'>{option.price}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -341,9 +335,9 @@ const ProjectDetail = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: idx * 0.1 }}
-                    className='flex items-center gap-4 p-4 rounded-lg bg-[#058F44]/10'
+                    className='flex items-center gap-4 p-4 rounded-lg bg-brand/10'
                   >
-                    <div className='w-3 h-3 rounded-full bg-[#058F44] shrink-0' />
+                    <div className='w-3 h-3 rounded-full bg-brand shrink-0' />
                     <span className='font-semibold text-gray-900'>{feature}</span>
                   </motion.div>
                 ))}
@@ -366,7 +360,7 @@ const ProjectDetail = () => {
                   <p className='text-gray-600 text-sm uppercase tracking-wide mb-2'>
                     {listingConfig.specificationLabels[key] || key.replace(/([A-Z])/g, ' $1').trim()}
                   </p>
-                  <p className={`text-2xl font-bold ${key === 'floors' && (value === 'Available' || value === 'Unavailable') ? (value === 'Available' ? 'text-[#058F44]' : 'text-slate-600') : 'text-gray-900'}`}>{value}</p>
+                  <p className={`text-2xl font-bold ${key === 'floors' && (value === 'Available' || value === 'Unavailable') ? (value === 'Available' ? 'text-brand' : 'text-slate-600') : 'text-gray-900'}`}>{value}</p>
                 </motion.div>
               ))}
               {project.listingType === 'property' && project.paymentPlan && (
@@ -377,14 +371,14 @@ const ProjectDetail = () => {
                   className='p-6 rounded-lg border border-gray-200 text-center'
                 >
                   <p className='text-gray-600 text-sm uppercase tracking-wide mb-2'>Payment Plan</p>
-                  <p className={`text-2xl font-bold ${project.paymentPlan === 'Available' ? 'text-[#058F44]' : 'text-slate-600'}`}>{project.paymentPlan}</p>
+                  <p className={`text-2xl font-bold ${project.paymentPlan === 'Available' ? 'text-brand' : 'text-slate-600'}`}>{project.paymentPlan}</p>
                 </motion.div>
               )}
             </div>
           </div>
 
           {/* Request Inspection */}
-          <div className='rounded-2xl border border-[#058F44]/20 bg-linear-to-r from-[#058F44]/5 to-[#058F44]/10 p-6 md:p-8'>
+          <div className='rounded-2xl border border-brand/20 bg-linear-to-r from-brand/5 to-brand/10 p-6 md:p-8'>
             <h3 className='text-2xl font-bold text-gray-900 mb-2'>Request Inspection</h3>
             <p className='text-gray-600 mb-6'>Schedule an inspection and our team will confirm your visit details.</p>
 
@@ -491,7 +485,7 @@ const ProjectDetail = () => {
               </div>
 
               <div className='flex flex-col sm:flex-row sm:items-center gap-3'>
-                <button type='submit' disabled={tourSubmitting} className='bg-[#058F44] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#047335] transition disabled:opacity-60'>
+                <button type='submit' disabled={tourSubmitting} className='bg-brand text-white px-8 py-3 rounded-lg font-semibold hover:bg-brand-strong transition disabled:opacity-60'>
                   {tourSubmitting ? 'Submitting...' : 'Request Inspection'}
                 </button>
                 {tourSubmitted && (

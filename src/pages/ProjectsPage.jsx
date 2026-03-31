@@ -1,17 +1,14 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
 import Projects from '../components/Projects'
-import Footer from '../components/Footer'
+import SitePageLayout from '../components/SitePageLayout'
 
 const ProjectsPage = () => {
   return (
-    <div className='w-full overflow-hidden'>
-      <Navbar />
-      <div className='pt-10'>
+    <SitePageLayout>
+      <div>
         <Projects />
       </div>
-      <Footer />
-    </div>
+    </SitePageLayout>
   )
 }
 

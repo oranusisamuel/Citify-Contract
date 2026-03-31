@@ -142,21 +142,21 @@ const AdminToursPage = () => {
   }
 
   const statusStyles = {
-    new: 'bg-[#058F44]/10 text-[#058F44] border-[#058F44]/20',
+    new: 'bg-brand/10 text-brand border-brand/20',
     contacted: 'bg-amber-50 text-amber-700 border-amber-200',
     scheduled: 'bg-emerald-50 text-emerald-700 border-emerald-200',
     closed: 'bg-slate-100 text-slate-500 border-slate-200',
   }
 
   const rowToneStyles = {
-    new: 'border-l-[#058F44]/50 bg-[#058F44]/[0.02]',
+    new: 'border-l-brand/50 bg-brand/[0.02]',
     contacted: 'border-l-amber-300/70 bg-amber-50/35',
     scheduled: 'border-l-emerald-300/70 bg-emerald-50/35',
     closed: 'border-l-slate-200 bg-slate-50/40',
   }
 
   const statusDotStyles = {
-    new: 'bg-[#058F44]/80',
+    new: 'bg-brand/80',
     contacted: 'bg-amber-400/80',
     scheduled: 'bg-emerald-400/80',
     closed: 'bg-slate-300',
@@ -277,12 +277,13 @@ const AdminToursPage = () => {
       <header className='fixed top-0 left-0 right-0 z-50 bg-slate-900 shadow-lg'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 py-3 md:py-0 md:h-16 flex flex-col md:flex-row md:items-center md:justify-between gap-3'>
           <div className='flex items-center gap-3'>
-            <div className='w-8 h-8 rounded-lg bg-[#058F44] flex items-center justify-center font-bold text-white text-sm select-none'>C</div>
+            <div className='w-8 h-8 rounded-lg bg-brand flex items-center justify-center font-bold text-white text-sm select-none'>C</div>
             <span className='font-semibold text-white text-lg tracking-tight'>Citify Admin</span>
           </div>
           <nav className='w-full md:w-auto flex items-center gap-1 overflow-x-auto pb-1 md:pb-0'>
             <Link to='/admin/properties' className='px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 text-sm font-medium transition-colors whitespace-nowrap'>Properties</Link>
-            <Link to='/admin/tours' className='px-3 py-2 rounded-lg bg-[#058F44] text-white text-sm font-medium whitespace-nowrap'>Inspections</Link>
+            <Link to='/admin/tours' className='px-3 py-2 rounded-lg bg-brand text-white text-sm font-medium whitespace-nowrap'>Inspections</Link>
+            <Link to='/admin/contacts' className='px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 text-sm font-medium transition-colors whitespace-nowrap'>Contacts</Link>
             <button onClick={onLogout} className='ml-auto md:ml-2 px-3 py-2 rounded-lg border border-slate-600 text-slate-300 hover:text-white hover:bg-slate-700 text-sm transition-colors whitespace-nowrap'>Log Out</button>
           </nav>
         </div>
@@ -332,14 +333,14 @@ const AdminToursPage = () => {
                       value={searchQuery}
                       onChange={(event) => setSearchQuery(event.target.value)}
                       placeholder='Search by property or name'
-                      className='w-full border border-slate-200 rounded-xl pl-9 pr-3 py-2.5 text-sm focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all'
+                      className='w-full border border-slate-200 rounded-xl pl-9 pr-3 py-2.5 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all'
                     />
                   </div>
 
                   <select
                     value={typeFilter}
                     onChange={(event) => setTypeFilter(event.target.value)}
-                    className='w-full border border-slate-200 rounded-xl px-3 py-2.5 text-sm bg-white focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all cursor-pointer'
+                    className='w-full border border-slate-200 rounded-xl px-3 py-2.5 text-sm bg-white focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all cursor-pointer'
                   >
                     <option value='all'>All Types</option>
                     <option value='in_person'>In-Person</option>
@@ -349,7 +350,7 @@ const AdminToursPage = () => {
                   <select
                     value={dateFilter}
                     onChange={(event) => setDateFilter(event.target.value)}
-                    className='w-full border border-slate-200 rounded-xl px-3 py-2.5 text-sm bg-white focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all cursor-pointer'
+                    className='w-full border border-slate-200 rounded-xl px-3 py-2.5 text-sm bg-white focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all cursor-pointer'
                   >
                     <option value='all'>All Dates</option>
                     <option value='today'>Today</option>
@@ -371,7 +372,7 @@ const AdminToursPage = () => {
                       onClick={() => setStatusFilter(tab.value)}
                       className={`shrink-0 md:shrink px-3 py-2 rounded-xl text-xs font-semibold border whitespace-nowrap transition-colors ${
                         statusFilter === tab.value
-                          ? 'bg-[#058F44] text-white border-[#058F44]'
+                          ? 'bg-brand text-white border-brand'
                           : 'border-slate-200 text-slate-600 hover:bg-slate-50'
                       }`}
                     >
@@ -628,7 +629,7 @@ const AdminToursPage = () => {
                 <select
                   value={selectedTour.status}
                   onChange={(event) => onChangeStatus(selectedTour.id, event.target.value)}
-                  className='w-full rounded-xl border border-slate-200 px-3 py-2 bg-white text-sm text-slate-700 focus:outline-none focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/10 transition-all cursor-pointer'
+                  className='w-full rounded-xl border border-slate-200 px-3 py-2 bg-white text-sm text-slate-700 focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition-all cursor-pointer'
                 >
                   {statusOptions.map((status) => (
                     <option key={status} value={status}>{statusLabelMap[status] || status}</option>

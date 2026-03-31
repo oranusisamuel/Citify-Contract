@@ -68,9 +68,9 @@ const cardVariants = {
 const Card = ({ title, description, icon: Icon }) => (
   <motion.div
     variants={cardVariants}
-    className="relative rounded-2xl p-6 bg-white/10 border border-white/15 hover:border-[#058F44]/40 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-[#058F44]/10"
+    className="relative rounded-2xl p-6 bg-white/10 border border-white/15 hover:border-brand/40 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-brand/10"
   >
-    <div className="mb-4 text-[#058F44] text-3xl">
+    <div className="mb-4 text-brand text-3xl">
       <Icon />
     </div>
     <h3 className="text-lg font-semibold text-white mb-2 tracking-wide">{title}</h3>
@@ -82,7 +82,7 @@ const WhyChooseUs = () => (
   <section className="bg-white py-16 px-6 w-full" id="why-choose-us">
     <div className="max-w-7xl mx-auto rounded-4xl border border-slate-800 bg-slate-900 px-6 py-12 text-center shadow-[0_24px_70px_rgba(15,23,42,0.18)] sm:px-8 md:px-10 md:py-14">
       <div className="mb-12">
-        <span className="inline-block text-sm text-[#058F44] bg-[#058F44]/10 px-4 py-1 rounded-full tracking-wide mb-4">Reasons</span>
+        <span className="inline-block text-sm text-brand bg-brand/10 px-4 py-1 rounded-full tracking-wide mb-4">Reasons</span>
         <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Why Choose Us?</h2>
         <p className="text-gray-400 max-w-2xl mx-auto leading-relaxed">We combine experience, innovation, and reliability to deliver exceptional real estate solutions that drive growth and long-term value.</p>
       </div>

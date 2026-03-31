@@ -12,6 +12,7 @@ const normalizeTour = (tour) => ({
   projectLocation: tour.projectLocation || '',
   tourType: tour.tourType || 'in-person',
   date: tour.date || '',
+  dateLabel: tour.dateLabel || '',
   time: tour.time || '',
   name: tour.name || '',
   phone: tour.phone || '',
@@ -22,8 +23,15 @@ const normalizeTour = (tour) => ({
 })
 
 export const createTourRequest = async (tour) => {
+  const isoDate = String(tour?.date || '')
+  const dateLabel = isoDate
+    ? new Date(`${isoDate}T00:00:00`).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' })
+    : ''
+
   const payload = {
     ...normalizeTour(tour),
+    date: isoDate,
+    dateLabel,
     status: 'new',
     createdAt: serverTimestamp(),
   }

@@ -4,11 +4,11 @@ import { useAuth } from '../context/AuthContext'
 import LoadingPage from './LoadingPage'
 
 const ProtectedRoute = ({ children }) => {
-  const { user } = useAuth()
+  const { user, isAdmin, authLoading } = useAuth()
 
-  if (user === undefined) return <LoadingPage />
+  if (authLoading || user === undefined) return <LoadingPage />
 
-  if (!user) return <Navigate to='/admin/login' replace />
+  if (!user || !isAdmin) return <Navigate to='/admin/login' replace />
 
   return children
 }

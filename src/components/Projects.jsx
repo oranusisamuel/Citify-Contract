@@ -79,18 +79,18 @@ const Projects = () => {
       <motion.div
         variants={fadeUp}
         viewport={viewportOnce}
-        className='relative overflow-hidden rounded-4xl border border-[#058F44]/15 bg-[radial-gradient(circle_at_top_left,rgba(5,143,68,0.14),transparent_35%),linear-gradient(180deg,#f7fcf9_0%,#ffffff_62%)] px-6 py-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] sm:px-8 lg:px-12 lg:py-12'
+        className='relative overflow-hidden rounded-4xl border border-brand/15 bg-[radial-gradient(circle_at_top_left,rgba(5,143,68,0.14),transparent_35%),linear-gradient(180deg,#f7fcf9_0%,#ffffff_62%)] px-6 py-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] sm:px-8 lg:px-12 lg:py-12'
       >
-        <div className='absolute -right-10 top-0 h-32 w-32 rounded-full bg-[#058F44]/10 blur-3xl' />
+        <div className='absolute -right-10 top-0 h-32 w-32 rounded-full bg-brand/10 blur-3xl' />
         <div className='absolute bottom-0 left-0 h-28 w-28 rounded-full bg-slate-900/5 blur-3xl' />
 
         <div className='relative'>
           <div>
-            <span className='inline-flex items-center gap-2 rounded-full border border-[#058F44]/15 bg-white/80 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#058F44] shadow-sm'>
+            <span className='inline-flex items-center gap-2 rounded-full border border-brand/15 bg-white/80 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand shadow-sm'>
               Listings
             </span>
             <h1 className='mt-5 max-w-3xl text-4xl font-semibold leading-tight text-slate-900 sm:text-5xl'>
-              Properties <span className='text-[#058F44]'>Available</span> for your next smart move
+              Properties <span className='text-brand'>Available</span> for your next smart move
             </h1>
             <p className='mt-4 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg'>
               Explore curated listings with verified locations, strong growth potential, and guided inspection support for serious buyers.
@@ -105,14 +105,14 @@ const Projects = () => {
                     value={searchQuery}
                     onChange={(event) => setSearchQuery(event.target.value)}
                     placeholder='Search by property name'
-                    className='w-full rounded-2xl border border-slate-200 bg-white py-3 pl-10 pr-4 text-sm text-slate-700 outline-none transition focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/20'
+                    className='w-full rounded-2xl border border-slate-200 bg-white py-3 pl-10 pr-4 text-sm text-slate-700 outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20'
                   />
                 </label>
 
                 <select
                   value={selectedType}
                   onChange={(event) => setSelectedType(event.target.value)}
-                  className='rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 outline-none transition focus:border-[#058F44] focus:ring-2 focus:ring-[#058F44]/20'
+                  className='rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20'
                 >
                   {typeOptions.map((typeOption) => (
                     <option key={typeOption.value} value={typeOption.value}>{typeOption.label}</option>
@@ -143,14 +143,13 @@ const Projects = () => {
         className='mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 items-stretch'
       >
         {loading && (
-          <div className='col-span-full rounded-[1.75rem] border border-dashed border-[#058F44]/30 bg-[#058F44]/5 px-6 py-14 text-center text-slate-500'>Loading properties...</div>
+          <div className='col-span-full rounded-[1.75rem] border border-dashed border-brand/30 bg-brand/5 px-6 py-14 text-center text-slate-500'>Loading properties...</div>
         )}
 
         {!loading && filteredProjects.map((project) => {
           const images = getImages(project)
           const mainImage = images[0] || project.image
           const area = project.specifications?.area || 'Prime parcel'
-          const listingConfig = getListingTypeConfig(project.listingType)
           const showStartingFrom = project.listingType === 'land' && project.landPlotMode === 'multiple' && Array.isArray(project.plotOptions) && project.plotOptions.length > 0
           const landDetailItems = project.listingType === 'land'
             ? String(project.details || '')
@@ -173,7 +172,7 @@ const Projects = () => {
               >
                 <div className='relative overflow-hidden'>
                   {project.featured && (
-                    <div className='absolute left-4 top-4 z-10 inline-flex items-center rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#058F44] shadow-sm'>
+                    <div className='absolute left-4 top-4 z-10 inline-flex items-center rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand shadow-sm'>
                       Featured
                     </div>
                   )}
@@ -201,11 +200,11 @@ const Projects = () => {
                     <div>
                       <h2 className='text-xl sm:text-2xl font-semibold text-slate-900 wrap-break-word'>{project.title}</h2>
                       <div className='mt-2 flex items-center gap-2 text-sm text-slate-500'>
-                        <MapPin size={15} className='text-[#058F44]' />
+                        <MapPin size={15} className='text-brand' />
                         <span className='wrap-break-word'>{project.location}</span>
                       </div>
                     </div>
-                    <span className='shrink-0 whitespace-nowrap rounded-full bg-[#058F44]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-[#058F44]'>
+                    <span className='shrink-0 whitespace-nowrap rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-brand'>
                       Inspection Ready
                     </span>
                   </div>
@@ -223,7 +222,7 @@ const Projects = () => {
                       </span>
                     ))}
                     {extraFeaturesCount > 0 && (
-                      <span className='rounded-full border border-[#058F44]/30 bg-[#058F44]/5 px-3 py-1 text-xs font-medium text-[#058F44]'>
+                      <span className='rounded-full border border-brand/30 bg-brand/5 px-3 py-1 text-xs font-medium text-brand'>
                         +{extraFeaturesCount} more
                       </span>
                     )}

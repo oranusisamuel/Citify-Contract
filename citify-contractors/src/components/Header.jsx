@@ -6,6 +6,7 @@ import { assets, testimonialsData } from '../assets/index'
 import { seedProjectsIfEmpty, subscribeToProjects } from '../utils/projectsStore'
 import { toast } from 'react-toastify'
 import { makeFadeUp, makeStaggerContainer, useMotionSettings, viewportOnce } from '../utils/motion'
+import { createContactRequest } from '../utils/contactStore'
 
 const Header = () => {
   const [result, setResult] = useState("");
@@ -122,25 +123,29 @@ const Header = () => {
       return;
     }
 
-    setResult("Sending....");
+    setResult('Sending...');
 
-    formData.append("access_key", "39b3e6de-e385-4b3a-92b9-44f8298021b9");
+    try {
+      await createContactRequest({
+        name,
+        email,
+        message,
+        source: 'header',
+      })
 
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      body: formData
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      setResult("Form Submitted Successfully");
-      toast.success("Form Submitted Successfully");
-      event.target.reset();
-    } else {
-      console.log("Error", data);
-      toast.error(data.message)
-      setResult("");
+      setResult('Form Submitted Successfully')
+      toast.success('Form Submitted Successfully')
+      event.target.reset()
+      setConsent(false)
+      setContactError('')
+      setTimeout(() => {
+        setResult('')
+      }, 2500)
+    } catch (error) {
+      console.error('Contact request submit error:', error)
+      setContactError('Unable to submit right now. Please try again shortly.')
+      toast.error('Unable to submit right now. Please try again shortly.')
+      setResult('')
     }
   };
 
@@ -160,7 +165,7 @@ const Header = () => {
             <motion.h2 variants={fadeUp} className='text-4xl sm:text-6xl md:text-[82px] inline-block max-w-3xl font-semibold leading-tight sm:leading-[1.03] pt-20'>Your Gateway to Premium Real Estate</motion.h2>
             <motion.div variants={fadeUp} className='mt-4 flex flex-col items-center gap-3 sm:mt-2 sm:flex-row sm:justify-center sm:gap-6'>
                   <Link to="/properties" className=' border border-white px-8 py-3 rounded inline-block'>Properties</Link>
-                  <Link to="/contact" className=' bg-[#058F44] px-8 py-3 rounded inline-block text-white'>Contact Us</Link>
+                  <Link to="/contact" className=' bg-brand px-8 py-3 rounded inline-block text-white'>Contact Us</Link>
             </motion.div>
           </div>
         </motion.div>
@@ -186,7 +191,7 @@ const Header = () => {
                      </div>
                      <div>
                       <p className='text-4xl font-medium text-gray-800'>{projects > 0 ? projects : 0}+</p>
-                      <p>Properties Available</p>
+                        <p>Properties Sold</p>
                      </div>
                      <div>
                       <p className='text-4xl font-medium text-gray-800'>{sqft > 0 ? sqft : 0}+</p>
@@ -198,7 +203,7 @@ const Header = () => {
                      </div>
                   </div>
                   <p className='my-10 max-w-lg '>Our core purpose is to restore balance and reliability to the industry by operating with uncompromising integrity and transparency. At Citify, we firmly believe in a client-first philosophy, prioritizing your peace of mind and long-term success over short-term profit maximization.</p>
-                  <Link to="/about" className='bg-[#058F44] text-white px-8 py-2 rounded cursor-pointer inline-block'>Learn More</Link>
+                  <Link to="/about" className='bg-brand text-white px-8 py-2 rounded cursor-pointer inline-block'>Learn More</Link>
               </div>
           </div>
       </motion.div>
@@ -212,13 +217,13 @@ const Header = () => {
           className='container mx-auto py-4 pt-20 px-6 md:px-20 lg:px-32 my-20 w-full overflow-hidden'
           id='Properties'
         >
-          <div className='rounded-4xl border border-[#058F44]/15 bg-[radial-gradient(circle_at_top_left,rgba(5,143,68,0.12),transparent_35%),linear-gradient(180deg,#f7fcf9_0%,#ffffff_62%)] p-6 sm:p-8 shadow-[0_20px_50px_rgba(15,23,42,0.08)]'>
+          <div className='rounded-4xl border border-brand/15 bg-[radial-gradient(circle_at_top_left,rgba(5,143,68,0.12),transparent_35%),linear-gradient(180deg,#f7fcf9_0%,#ffffff_62%)] p-6 sm:p-8 shadow-[0_20px_50px_rgba(15,23,42,0.08)]'>
             <h1 className='text-2xl sm:text-4xl font-bold mb-2 text-center'>Featured <span className='underline underline-offset-4 decoration-1 font-light'>Properties</span></h1>
             <p className='text-center text-slate-600 mb-8 max-w-2xl mx-auto'>Explore high-potential land listings in fast-growing locations, curated for serious buyers and smart investors.</p>
 
             <div className='flex justify-center items-center gap-3 mb-5'>
               <button onClick={previousProject} className='bg-white border border-slate-200 p-2.5 rounded-full hover:bg-slate-50 transition-colors shadow-sm'><img src={assets.left_arrow} alt='Previous' className='w-4 h-4'/></button>
-              <button onClick={nextProject} className='bg-[#058F44] border border-[#058F44] p-2.5 rounded-full hover:bg-[#047335] transition-colors shadow-sm'><img src={assets.right_arrow} alt='Next' className='w-4 h-4 brightness-0 invert'/></button>
+              <button onClick={nextProject} className='bg-brand border border-brand p-2.5 rounded-full hover:bg-brand-strong transition-colors shadow-sm'><img src={assets.right_arrow} alt='Next' className='w-4 h-4 brightness-0 invert'/></button>
                     </div>
 
             <div className='overflow-hidden'>
@@ -227,7 +232,7 @@ const Header = () => {
                   <motion.div variants={fadeUp} key={project.id} className='shrink-0 w-full md:w-1/2 lg:w-1/3'>
                     <Link to={`/property/${project.id}`} className='group block rounded-3xl overflow-hidden border border-slate-200 bg-white hover:shadow-[0_20px_45px_rgba(15,23,42,0.12)] transition-all h-full'>
                       <div className='relative overflow-hidden'>
-                        <span className='absolute top-3 left-3 z-10 whitespace-nowrap text-[10px] font-semibold uppercase tracking-[0.22em] px-2.5 py-1 rounded-full bg-white/90 text-[#058F44]'>Inspection Ready</span>
+                        <span className='absolute top-3 left-3 z-10 whitespace-nowrap text-[10px] font-semibold uppercase tracking-[0.22em] px-2.5 py-1 rounded-full bg-white/90 text-brand'>Inspection Ready</span>
                         <div className='absolute inset-x-0 bottom-0 z-10 h-24 bg-linear-to-t from-slate-950/70 to-transparent' />
                         <img src={project.image} alt={project.title} className='w-full h-52 object-cover bg-gray-100 transition-transform duration-500 group-hover:scale-[1.04]' />
                         <p className='absolute bottom-3 left-4 z-10 text-white text-xl font-semibold'>{project.price}</p>
@@ -244,7 +249,7 @@ const Header = () => {
             </div>
 
             <div className='text-center mt-8'>
-                <Link to="/properties" className='bg-[#058F44] text-white px-8 py-2.5 rounded-full cursor-pointer inline-block hover:bg-[#047335] transition-colors'>View All Properties</Link>
+                <Link to="/properties" className='bg-brand text-white px-8 py-2.5 rounded-full cursor-pointer inline-block hover:bg-brand-strong transition-colors'>View All Properties</Link>
             </div>
           </div>
       </motion.div>
@@ -268,7 +273,7 @@ const Header = () => {
                   <h2 className='text-lg text-slate-800 font-semibold'>{testimonial.name}</h2>
                   <p className='text-slate-500 text-sm'>{testimonial.title}</p>
                 </div>
-                <span className='text-3xl leading-none text-[#058F44]/70 font-serif' aria-hidden='true'>"</span>
+                <span className='text-3xl leading-none text-brand/70 font-serif' aria-hidden='true'>"</span>
                 </div>
                 <div className='flex gap-1 mb-4'>
                   {Array.from({length: testimonial.rating}, (_, starIndex)=> (
@@ -292,24 +297,24 @@ const Header = () => {
       >
         <div className='max-w-6xl mx-auto'>
           <div className='text-center mb-12'>
-            <h1 className='text-3xl sm:text-5xl font-bold text-slate-900'>Start Your Property Acquisition <span className='text-[#058F44]'>Journey</span></h1>
+            <h1 className='text-3xl sm:text-5xl font-bold text-slate-900'>Start Your Property Acquisition <span className='text-brand'>Journey</span></h1>
             <p className='text-slate-600 mt-3 max-w-2xl mx-auto'>Tell us about your property needs and timeline, and we will guide you through the entire acquisition process with expert support.</p>
           </div>
 
           <motion.div variants={staggerContainer} className='grid grid-cols-1 lg:grid-cols-5 gap-6'>
             <div className='lg:col-span-2 rounded-3xl bg-slate-900 text-white p-8 shadow-xl'>
-              <p className='text-xs uppercase tracking-[0.2em] text-[#058F44]/70 font-semibold'>Fast consultation</p>
+              <p className='text-xs uppercase tracking-[0.2em] text-brand/70 font-semibold'>Fast consultation</p>
               <h2 className='text-2xl font-semibold mt-2'>Invest with confidence</h2>
               <p className='text-slate-300 mt-4 leading-relaxed'>Our team of experts will collaborate to find you the perfect property that meets your needs.</p>
 
               <div className='mt-8 space-y-4 text-sm'>
                 <div className='rounded-xl bg-white/10 border border-white/15 p-4'>
-                  <p className='text-[#058F44]/60 uppercase text-[10px] tracking-widest'>Average Reply</p>
+                  <p className='text-brand/60 uppercase text-[10px] tracking-widest'>Average Reply</p>
                   <p className='mt-1 font-medium'>Within 24 hours</p>
                 </div>
                 <div className='rounded-xl bg-white/10 border border-white/15 p-4'>
-                  <p className='text-[#058F44]/60 uppercase text-[10px] tracking-widest'>Office Hours</p>
-                  <p className='mt-1 font-medium'>Mon - Fri, 9:00 AM - 5:00 PM</p>
+                  <p className='text-brand/60 uppercase text-[10px] tracking-widest'>Office Hours</p>
+                  <p className='mt-1 font-medium'>Mon - Fri, 10:00 AM - 5:00 PM</p>
                 </div>
               </div>
             </div>
@@ -320,7 +325,7 @@ const Header = () => {
                   <div>
                     <label className='text-sm font-medium text-slate-700'>Your Name</label>
                     <input
-                      className='w-full border border-slate-300 rounded-xl py-3 px-4 mt-2 focus:outline-none focus:ring-2 focus:ring-[#058F44]/20 focus:border-[#058F44]'
+                      className='w-full border border-slate-300 rounded-xl py-3 px-4 mt-2 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand'
                       type='text'
                       name='Name'
                       placeholder='Your full name'
@@ -330,7 +335,7 @@ const Header = () => {
                   <div>
                     <label className='text-sm font-medium text-slate-700'>Your Email</label>
                     <input
-                      className='w-full border border-slate-300 rounded-xl py-3 px-4 mt-2 focus:outline-none focus:ring-2 focus:ring-[#058F44]/20 focus:border-[#058F44]'
+                      className='w-full border border-slate-300 rounded-xl py-3 px-4 mt-2 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand'
                       type='email'
                       name='Email'
                       placeholder='you@example.com'
@@ -342,7 +347,7 @@ const Header = () => {
                 <div className='mt-5'>
                   <label className='text-sm font-medium text-slate-700'>Message</label>
                   <textarea
-                    className='w-full border border-slate-300 rounded-xl py-3 px-4 mt-2 h-36 resize-none focus:outline-none focus:ring-2 focus:ring-[#058F44]/20 focus:border-[#058F44]'
+                    className='w-full border border-slate-300 rounded-xl py-3 px-4 mt-2 h-36 resize-none focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand'
                     name='Message'
                     placeholder='Enter your message'
                     required
@@ -354,18 +359,18 @@ const Header = () => {
                     type='checkbox'
                     checked={consent}
                     onChange={(e) => { setConsent(e.target.checked); setContactError(''); }}
-                    className='mt-0.5 w-4 h-4 accent-[#058F44] cursor-pointer shrink-0'
+                    className='mt-0.5 w-4 h-4 accent-brand cursor-pointer shrink-0'
                   />
                   <span className='text-xs text-slate-500 leading-relaxed'>
                     I consent to Citify Contractors collecting and using my details to respond to this enquiry, in accordance with their{' '}
-                    <Link to='/privacy-policy' className='text-[#058F44] underline underline-offset-2 hover:text-[#047335]'>Privacy Policy</Link>.
+                    <Link to='/privacy-policy' className='text-brand underline underline-offset-2 hover:text-brand-strong'>Privacy Policy</Link>.
                   </span>
                 </label>
 
                 {contactError && <p className='text-sm text-red-600 mt-3'>{contactError}</p>}
 
                 <div className='mt-4'>
-                  <button disabled={!consent} className='bg-[#058F44] text-white py-3 px-10 rounded-xl font-medium hover:bg-[#047335] transition-colors disabled:opacity-50 disabled:cursor-not-allowed'>
+                  <button disabled={!consent} className='bg-brand text-white py-3 px-10 rounded-xl font-medium hover:bg-brand-strong transition-colors disabled:opacity-50 disabled:cursor-not-allowed'>
                     {result ? result : 'Send Message'}
                   </button>
                 </div>
