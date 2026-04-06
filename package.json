@@ -12,8 +12,9 @@
     "test:watch": "vitest",
     "check:secrets": "node scripts/check-secrets.cjs",
     "check:structure": "node scripts/check-single-source.cjs",
-    "ci": "npm run check:secrets && npm run check:structure && npm run test && npm run build",
-    "ci:full": "npm run check:secrets && npm run check:structure && npm run lint && npm run test && npm run build"
+    "check:structure:strict": "node scripts/check-single-source.cjs --strict",
+    "ci": "npm run check:secrets && npm run check:structure:strict && npm run test && npm run build",
+    "ci:full": "npm run check:secrets && npm run check:structure:strict && npm run lint && npm run test && npm run build"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.100.2",
