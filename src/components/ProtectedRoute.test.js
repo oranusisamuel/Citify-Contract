@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { resolveProtectedRouteState } from './ProtectedRoute'
+import { resolveProtectedRouteState } from './protectedRouteState'
 
 describe('resolveProtectedRouteState', () => {
   it('returns loading while auth is resolving', () => {

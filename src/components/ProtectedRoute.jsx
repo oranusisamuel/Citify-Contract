@@ -2,12 +2,7 @@ import React from 'react'
 import { Navigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import LoadingPage from './LoadingPage'
-
-export const resolveProtectedRouteState = ({ user, isAdmin, authLoading }) => {
-  if (authLoading || user === undefined) return 'loading'
-  if (!user || !isAdmin) return 'redirect'
-  return 'allow'
-}
+import { resolveProtectedRouteState } from './protectedRouteState'
 
 const ProtectedRoute = ({ children }) => {
   const { user, isAdmin, authLoading } = useAuth()
