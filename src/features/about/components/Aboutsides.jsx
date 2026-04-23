@@ -42,20 +42,28 @@ const Block = ({ title, text }) => (
 const Aboutsides = () => {
   const services = [
     {
-      title: 'Property Sales',
-      text: 'Verified land and property listings with transparent pricing and documentation support.',
+      title: 'Property Management',
+      text: 'Verified property management services with transparent pricing and documentation support.',
     },
     {
-      title: 'Inspection Scheduling',
-      text: 'Flexible inspection coordination to help you evaluate options quickly and confidently.',
+      title: 'Sales Training & Management',
+      text: 'Flexible training programs and management support to enhance your sales performance.',
     },
     {
-      title: 'Investment Advisory',
-      text: 'Market-backed guidance on high-potential locations, pricing trends, and acquisition strategy.',
+      title: 'Marketing',
+      text: 'Marketing strategies to promote your properties and reach potential buyers.',
     },
     {
-      title: 'Client Support',
-      text: 'Responsive follow-up from enquiry to close, so every step of your purchase stays clear and organized.',
+      title: 'Estate construction & development',
+      text: 'End-to-end construction and development services for residential and commercial properties.',
+    },
+    {
+      title: 'General construction',
+      text: 'Verified general construction services with transparent pricing and documentation support.',
+    },
+    {
+      title: 'Client support',
+      text: 'Verified client support services with transparent communication and documentation.',
     },
   ]
 

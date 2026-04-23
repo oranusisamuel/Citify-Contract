@@ -12,6 +12,10 @@ import { useAnimatedStats } from '../utils/useAnimatedStats'
 
 const faqItems = [
   {
+    question:'How am I guaranteed that my investment is safe?',
+    answer: 'We have strict verification processes and transparent pricing to ensure your investment is secure.',
+  },
+  {
     question: 'How do I schedule an inspection?',
     answer: 'Open any property listing, click Request Inspection, choose your preferred date and time, and submit your details. Our team will confirm your slot shortly.',
   },
@@ -24,8 +28,8 @@ const faqItems = [
     answer: 'Absolutely. Share your goals through our contact form and our team will guide you through options, pricing, and the next steps.',
   },
   {
-    question: 'What response time should I expect?',
-    answer: 'Most enquiries receive a response within one business day, often sooner during business hours.',
+    question: 'Do you have a payment plan?',
+    answer: 'We offer flexible payment options for qualified buyers.',
   },
 ]
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { assets } from '../../assets'
 import LazyImage from '../LazyImage'
-import { COMPANY, COMPANY_STATS } from '../../utils/siteConfig'
+import { COMPANY, COMPANY_STATS } from '../../shared/config/siteConfig'
 import { makeFadeUp, makeStaggerContainer, useMotionSettings, viewportOnce } from '../../utils/motion'
 
 const About = () => {

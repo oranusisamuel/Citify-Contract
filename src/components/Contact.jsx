@@ -124,10 +124,12 @@ const Contact = () => {
                   >
                     <option value='' disabled>Select a subject</option>
                     <option value='General Enquiry'>General Enquiry</option>
-                    <option value='Property Purchase'>Property Purchase</option>
-                    <option value='Inspection Request'>Inspection Request</option>
-                    <option value='Support Request'>Support Request</option>
-                    <option value='Partnership'>Partnership</option>
+                    <option value='Property Management'>Property Management</option>
+                    <option value='Sales Training & Management'>Sales Training & Management</option>
+                    <option value='Marketing'>Marketing</option>
+                    <option value='Estate Construction & Development'>Estate Construction & Development</option>
+                    <option value='General Construction'>General Construction</option>
+                    <option value='Partnership & Collaboration'>Partnership & Collaboration</option>
                   </select>
                 </div>
                 <div>
