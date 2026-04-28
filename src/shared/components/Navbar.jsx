@@ -72,7 +72,7 @@ const Navbar = () => {
             <img src={assets.logo} alt='Citify logo' className='h-11 w-auto sm:h-12' />
           </Link>
 
-          <ul className='hidden md:flex items-center gap-4 lg:gap-8 min-w-0'>
+          <ul className='hidden lg:flex items-center gap-4 lg:gap-8 min-w-0'>
             {navItems.map((item) => {
               const isActive = item.match(location.pathname)
               return (
@@ -91,7 +91,7 @@ const Navbar = () => {
           <div className='flex items-center gap-3'>
             <Link
               to='/contact'
-              className='hidden md:inline-flex items-center rounded-full border border-brand-accent/35 bg-brand/85 px-5 py-2.5 text-sm font-semibold tracking-wide text-white transition-colors hover:bg-brand-strong lg:px-6'
+              className='hidden lg:inline-flex items-center rounded-full border border-brand-accent/35 bg-brand/85 px-5 py-2.5 text-sm font-semibold tracking-wide text-white transition-colors hover:bg-brand-strong lg:px-6'
             >
               Book an Appointment
             </Link>
@@ -99,7 +99,7 @@ const Navbar = () => {
             <button
               type='button'
               onClick={() => setShowMobileMenu(true)}
-              className='md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-accent/35 bg-brand/35 focus:outline-none focus:ring-2 focus:ring-brand-accent/80'
+              className='lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-accent/35 bg-brand/35 focus:outline-none focus:ring-2 focus:ring-brand-accent/80'
               aria-label='Open navigation menu'
               aria-expanded={showMobileMenu}
             >
