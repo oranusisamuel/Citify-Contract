@@ -72,7 +72,7 @@ const Navbar = () => {
             <img src={assets.logo} alt='Citify logo' className='h-11 w-auto sm:h-12' />
           </Link>
 
-          <ul className='hidden md:flex items-center gap-4 lg:gap-8 overflow-x-auto min-w-0'>
+          <ul className='hidden md:flex items-center gap-4 lg:gap-8 min-w-0'>
             {navItems.map((item) => {
               const isActive = item.match(location.pathname)
               return (
