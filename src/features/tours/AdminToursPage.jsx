@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import AdminHeader from '../../shared/components/AdminHeader'
 import { signOut } from 'firebase/auth'
 import { auth } from '../../firebase'
 import { deleteTourRequest, fetchToursPage, updateTourStatus } from './toursStore'
@@ -313,22 +314,7 @@ const AdminToursPage = () => {
 
   return (
     <div className='min-h-screen bg-slate-50'>
-      {/* Admin Header */}
-      <header className='fixed top-0 left-0 right-0 z-50 bg-slate-900 shadow-lg'>
-        <div className='max-w-7xl mx-auto px-4 sm:px-6 py-3 md:py-0 md:h-16 flex flex-col md:flex-row md:items-center md:justify-between gap-3'>
-          <div className='flex items-center gap-3'>
-            <div className='w-8 h-8 rounded-lg bg-brand flex items-center justify-center font-bold text-white text-sm select-none'>C</div>
-            <span className='font-semibold text-white text-lg tracking-tight'>Citify Admin</span>
-          </div>
-          <nav className='w-full md:w-auto flex items-center gap-1 overflow-x-auto pb-1 md:pb-0'>
-            <Link to='/admin/properties' className='px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 text-sm font-medium transition-colors whitespace-nowrap'>Properties</Link>
-            <Link to='/admin/blog' className='px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 text-sm font-medium transition-colors whitespace-nowrap'>Blog</Link>
-            <Link to='/admin/tours' className='px-3 py-2 rounded-lg bg-brand text-white text-sm font-medium whitespace-nowrap'>Inspections</Link>
-            <Link to='/admin/contacts' className='px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 text-sm font-medium transition-colors whitespace-nowrap'>Contacts</Link>
-            <button onClick={onLogout} className='ml-auto md:ml-2 px-3 py-2 rounded-lg border border-slate-600 text-slate-300 hover:text-white hover:bg-slate-700 text-sm transition-colors whitespace-nowrap'>Log Out</button>
-          </nav>
-        </div>
-      </header>
+      <AdminHeader onLogout={onLogout} />
 
       <div className='pt-28 md:pt-16'>
         {/* Page title bar */}
@@ -399,7 +385,7 @@ const AdminToursPage = () => {
                   </select>
                 </div>
 
-                <div className='flex md:grid md:grid-cols-5 gap-2 overflow-x-auto md:overflow-visible pb-1 md:pb-0'>
+                <div className='flex flex-wrap gap-2 overflow-x-auto md:grid md:grid-cols-5 md:overflow-visible pb-1 md:pb-0'>
                   {[
                     { value: 'all', label: 'All' },
                     { value: 'new', label: 'New' },
@@ -411,7 +397,7 @@ const AdminToursPage = () => {
                       key={tab.value}
                       type='button'
                       onClick={() => setStatusFilter(tab.value)}
-                      className={`shrink-0 md:shrink px-3 py-2 rounded-xl text-xs font-semibold border whitespace-nowrap transition-colors ${
+                      className={`px-3 py-2 rounded-xl text-xs font-semibold border whitespace-nowrap transition-colors ${
                         statusFilter === tab.value
                           ? 'bg-brand text-white border-brand'
                           : 'border-slate-200 text-slate-600 hover:bg-slate-50'

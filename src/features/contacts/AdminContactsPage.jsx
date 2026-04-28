@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import AdminHeader from '../../shared/components/AdminHeader'
 import { signOut } from 'firebase/auth'
 import { auth } from '../../firebase'
 import { deleteContactRequest, fetchContactRequestsPage, updateContactStatus } from './contactStore'
@@ -218,21 +219,7 @@ const AdminContactsPage = () => {
 
   return (
     <div className='min-h-screen bg-slate-50'>
-      <header className='fixed top-0 left-0 right-0 z-50 bg-slate-900 shadow-lg'>
-        <div className='max-w-7xl mx-auto px-4 sm:px-6 py-3 md:py-0 md:h-16 flex flex-col md:flex-row md:items-center md:justify-between gap-3'>
-          <div className='flex items-center gap-3'>
-            <div className='w-8 h-8 rounded-lg bg-brand flex items-center justify-center font-bold text-white text-sm select-none'>C</div>
-            <span className='font-semibold text-white text-lg tracking-tight'>Citify Admin</span>
-          </div>
-          <nav className='w-full md:w-auto flex items-center gap-1 overflow-x-auto pb-1 md:pb-0'>
-            <Link to='/admin/properties' className='px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 text-sm font-medium transition-colors whitespace-nowrap'>Properties</Link>
-            <Link to='/admin/blog' className='px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 text-sm font-medium transition-colors whitespace-nowrap'>Blog</Link>
-            <Link to='/admin/tours' className='px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 text-sm font-medium transition-colors whitespace-nowrap'>Inspections</Link>
-            <Link to='/admin/contacts' className='px-3 py-2 rounded-lg bg-brand text-white text-sm font-medium whitespace-nowrap'>Contacts</Link>
-            <button onClick={onLogout} className='ml-auto md:ml-2 px-3 py-2 rounded-lg border border-slate-600 text-slate-300 hover:text-white hover:bg-slate-700 text-sm transition-colors whitespace-nowrap'>Log Out</button>
-          </nav>
-        </div>
-      </header>
+      <AdminHeader onLogout={onLogout} />
 
       <div className='pt-28 md:pt-16'>
         <div className='bg-white border-b border-slate-200'>
@@ -410,62 +397,64 @@ const AdminContactsPage = () => {
 
       {isPanelOpen && selectedContact && (
         <div className='fixed inset-0 z-70'>
-          <button
-            type='button'
+          <div
             className='absolute inset-0 bg-slate-950/50'
             onClick={closeDetailsPanel}
-            aria-label='Close details panel'
           />
 
-          <aside className='absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl border-l border-slate-200 overflow-y-auto'>
-            <div className='p-5 border-b border-slate-200 flex items-center justify-between'>
-              <h2 className='text-lg font-semibold text-slate-900'>Contact Details</h2>
+          <aside className={`absolute inset-x-0 bottom-0 h-[88vh] w-full bg-white shadow-2xl border-t border-slate-200 rounded-t-3xl transition-transform duration-300 ${isPanelOpen ? 'translate-y-0 md:translate-x-0' : 'translate-y-full md:translate-x-full'} md:inset-y-0 md:left-auto md:right-0 md:h-full md:max-w-md md:rounded-none md:border-t-0 md:border-l`}>
+            <div className='md:hidden pt-2 pb-1'>
+              <div className='mx-auto h-1 w-10 rounded-full bg-slate-300' />
+            </div>
+
+            <div className='px-5 py-4 border-b border-slate-100 flex items-center justify-between'>
+              <h2 className='text-sm font-semibold text-slate-900'>Contact Details</h2>
               <button
                 type='button'
                 onClick={closeDetailsPanel}
-                className='p-1 rounded hover:bg-slate-100 text-slate-500'
+                className='w-9 h-9 rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 transition-colors'
                 aria-label='Close details panel'
               >
-                ✕
+                ×
               </button>
             </div>
 
-            <div className='p-5 space-y-4 text-sm'>
+            <div className='p-5 space-y-4 overflow-y-auto h-[calc(100%-4.5rem)]'>
               <div>
-                <p className='text-[11px] font-semibold uppercase tracking-wide text-slate-400'>Name</p>
+                <p className='text-[10px] font-semibold uppercase tracking-wide text-slate-400'>Name</p>
                 <p className='mt-1 text-slate-800 font-medium'>{selectedContact.name || 'Unknown'}</p>
               </div>
 
               <div>
-                <p className='text-[11px] font-semibold uppercase tracking-wide text-slate-400'>Email</p>
+                <p className='text-[10px] font-semibold uppercase tracking-wide text-slate-400'>Email</p>
                 <p className='mt-1 text-slate-700 break-all'>{selectedContact.email || 'N/A'}</p>
               </div>
 
               {selectedContact.mobile && (
                 <div>
-                  <p className='text-[11px] font-semibold uppercase tracking-wide text-slate-400'>Mobile</p>
+                  <p className='text-[10px] font-semibold uppercase tracking-wide text-slate-400'>Mobile</p>
                   <p className='mt-1 text-slate-700'>{selectedContact.mobile}</p>
                 </div>
               )}
 
               <div>
-                <p className='text-[11px] font-semibold uppercase tracking-wide text-slate-400'>Date</p>
+                <p className='text-[10px] font-semibold uppercase tracking-wide text-slate-400'>Date</p>
                 <p className='mt-1 text-slate-700'>{formatReadableDate(selectedContact.createdAt)}</p>
               </div>
 
               <div>
-                <p className='text-[11px] font-semibold uppercase tracking-wide text-slate-400'>Subject</p>
+                <p className='text-[10px] font-semibold uppercase tracking-wide text-slate-400'>Subject</p>
                 <p className='mt-1 text-slate-700'>{selectedContact.subject || 'General enquiry'}</p>
               </div>
 
               <div>
-                <p className='text-[11px] font-semibold uppercase tracking-wide text-slate-400'>Message</p>
+                <p className='text-[10px] font-semibold uppercase tracking-wide text-slate-400'>Message</p>
                 <p className='mt-1 text-slate-700 whitespace-pre-wrap'>{selectedContact.message || 'No message provided.'}</p>
               </div>
 
               <div>
-                <p className='text-[11px] font-semibold uppercase tracking-wide text-slate-400'>Status</p>
-                <div className='mt-2 flex items-center gap-2'>
+                <p className='text-[10px] font-semibold uppercase tracking-wide text-slate-400'>Status</p>
+                <div className='mt-2 flex flex-wrap gap-2'>
                   {['new', 'contacted', 'closed'].map((status) => (
                     <button
                       key={status}

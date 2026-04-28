@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { signOut } from 'firebase/auth'
 import { Link, useNavigate } from 'react-router-dom'
+import AdminHeader from '../../shared/components/AdminHeader'
 import { auth } from '../../firebase'
 import { deleteProject, fetchProjectsPage, seedProjectsIfEmpty, uploadProjectImage, upsertProject } from './projectsStore'
 import { getListingTypeConfig, listingTypeOptions, normalizeListingType } from './listingTypes'
@@ -541,22 +542,7 @@ const AdminProjectsPage = () => {
 
   return (
     <div className='min-h-screen bg-slate-50'>
-      {/* Admin Header */}
-      <header className='fixed top-0 left-0 right-0 z-50 bg-slate-900 shadow-lg'>
-        <div className='max-w-7xl mx-auto px-6 h-16 flex items-center justify-between'>
-          <div className='flex items-center gap-3'>
-            <div className='w-8 h-8 rounded-lg bg-brand flex items-center justify-center font-bold text-white text-sm select-none'>C</div>
-            <span className='font-semibold text-white text-lg tracking-tight'>Citify Admin</span>
-          </div>
-          <nav className='flex items-center gap-1'>
-            <Link to='/admin/properties' className='px-4 py-2 rounded-lg bg-brand text-white text-sm font-medium'>Properties</Link>
-            <Link to='/admin/blog' className='px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 text-sm font-medium transition-colors'>Blog</Link>
-            <Link to='/admin/tours' className='px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 text-sm font-medium transition-colors'>Inspections</Link>
-            <Link to='/admin/contacts' className='px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 text-sm font-medium transition-colors'>Contacts</Link>
-            <button onClick={onLogout} className='ml-2 px-4 py-2 rounded-lg border border-slate-600 text-slate-300 hover:text-white hover:bg-slate-700 text-sm transition-colors'>Log Out</button>
-          </nav>
-        </div>
-      </header>
+      <AdminHeader onLogout={onLogout} />
 
       <div className='pt-16'>
         {/* Title bar */}

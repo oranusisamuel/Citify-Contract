@@ -67,19 +67,19 @@ const Navbar = () => {
   return (
     <div className='fixed top-0 left-0 w-full z-60 text-white'>
       <div className={`border-b backdrop-blur-md transition-all duration-300 ${scrolled ? 'border-brand/35 bg-[#022612]/95 shadow-[0_1px_20px_rgba(0,0,0,0.35)]' : 'border-brand/20 bg-[#022612]/72'}`}>
-        <div className='container mx-auto flex items-center justify-between px-4 py-4 md:px-10 lg:px-20'>
+        <div className='container mx-auto flex flex-wrap items-center justify-between gap-4 px-4 py-4 md:flex-nowrap md:px-10 lg:px-20'>
           <Link to='/' className='shrink-0'>
             <img src={assets.logo} alt='Citify logo' className='h-11 w-auto sm:h-12' />
           </Link>
 
-          <ul className='hidden md:flex items-center gap-8 lg:gap-11'>
+          <ul className='hidden lg:flex items-center gap-4 lg:gap-8 overflow-x-auto min-w-0'>
             {navItems.map((item) => {
               const isActive = item.match(location.pathname)
               return (
                 <li key={item.to}>
                   <Link
                     to={item.to}
-                    className={`relative text-[18px] font-semibold tracking-[0.01em] transition-colors duration-200 ${isActive ? activeClasses : inactiveClasses}`}
+                    className={`relative whitespace-nowrap text-base md:text-[18px] font-semibold tracking-[0.01em] transition-colors duration-200 ${isActive ? activeClasses : inactiveClasses}`}
                   >
                     {item.label}
                   </Link>
@@ -91,7 +91,7 @@ const Navbar = () => {
           <div className='flex items-center gap-3'>
             <Link
               to='/contact'
-              className='hidden md:inline-flex items-center rounded-full border border-brand-accent/35 bg-brand/85 px-6 py-2.5 text-sm font-semibold tracking-wide text-white transition-colors hover:bg-brand-strong'
+              className='hidden lg:inline-flex items-center rounded-full border border-brand-accent/35 bg-brand/85 px-5 py-2.5 text-sm font-semibold tracking-wide text-white transition-colors hover:bg-brand-strong lg:px-6'
             >
               Book an Appointment
             </Link>
@@ -99,7 +99,7 @@ const Navbar = () => {
             <button
               type='button'
               onClick={() => setShowMobileMenu(true)}
-              className='md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-accent/35 bg-brand/35 focus:outline-none focus:ring-2 focus:ring-brand-accent/80'
+              className='lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-accent/35 bg-brand/35 focus:outline-none focus:ring-2 focus:ring-brand-accent/80'
               aria-label='Open navigation menu'
               aria-expanded={showMobileMenu}
             >

@@ -32,8 +32,15 @@ const LoginPage = () => {
     try {
       await signInWithEmailAndPassword(auth, trimmedEmail, password)
       navigate('/admin/properties')
-    } catch {
-      setError('Invalid email or password.')
+    } catch (error) {
+      const code = error?.code || error?.message || ''
+      if (code.includes('auth/user-not-found') || code.includes('auth/invalid-email')) {
+        setError('No account found with that email address.')
+      } else if (code.includes('auth/wrong-password')) {
+        setError('Incorrect password. Please try again.')
+      } else {
+        setError('Invalid email or password.')
+      }
     } finally {
       setLoading(false)
     }
