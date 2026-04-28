@@ -108,7 +108,7 @@ service cloud.firestore {
 
       // Public contact request create with strict payload validation
       allow create: if
-        request.resource.data.keys().hasOnly(['name', 'email', 'subject', 'message', 'source', 'status', 'createdAt'])
+        request.resource.data.keys().hasOnly(['name', 'email', 'subject', 'message', 'source', 'mobile', 'status', 'createdAt'])
         && request.resource.data.createdAt is timestamp
         && isString(request.resource.data.name)
         && request.resource.data.name.size() >= 2
@@ -126,6 +126,7 @@ service cloud.firestore {
         && isString(request.resource.data.source)
         && request.resource.data.source.size() >= 3
         && request.resource.data.source.size() <= 60
+        && (!('mobile' in request.resource.data) || isString(request.resource.data.mobile))
         && isString(request.resource.data.status)
         && request.resource.data.status == 'new';
     }
