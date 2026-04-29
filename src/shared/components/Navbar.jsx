@@ -67,9 +67,9 @@ const Navbar = () => {
   return (
     <div className='fixed top-0 left-0 w-full z-60 text-white'>
       <div className={`border-b backdrop-blur-md transition-all duration-300 ${scrolled ? 'border-brand/35 bg-[#022612]/95 shadow-[0_1px_20px_rgba(0,0,0,0.35)]' : 'border-brand/20 bg-[#022612]/72'}`}>
-        <div className='container mx-auto flex flex-wrap items-center justify-between gap-4 px-4 py-4 md:flex-nowrap md:px-10 lg:px-20'>
+        <div className='container mx-auto flex flex-wrap items-center justify-between gap-4 px-4 py-2 md:flex-nowrap md:px-10 lg:px-20'>
           <Link to='/' className='shrink-0'>
-            <img src={assets.logo} alt='Citify logo' className='h-11 w-auto sm:h-12' />
+            <img src={assets.citify_white} alt='Citify logo' className='h-15 w-auto sm:h-16' />
           </Link>
 
           <ul className='hidden lg:flex items-center gap-4 lg:gap-8 min-w-0'>

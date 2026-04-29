@@ -20,7 +20,7 @@ const Footer = () => {
   return (
     <footer className='w-full bg-slate-900 text-slate-300 border-t border-slate-800' id='Footer'>
       <motion.div
-        className='max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-12'
+        className='max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-10'
         initial='hidden'
         whileInView='visible'
         viewport={viewportOnce}
@@ -28,8 +28,8 @@ const Footer = () => {
       >
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10'>
           <motion.div variants={fadeUp}>
-            <img src={assets.logo_dark} alt={`${COMPANY.name} logo`} className='h-10 w-auto' />
-            <p className='mt-4 text-sm leading-relaxed text-slate-400'>
+            <img src={assets.citify_white} alt={`${COMPANY.name} logo`} className='h-15 w-auto' />
+            <p className='mt-1 text-sm leading-relaxed text-slate-400'>
               We design and deliver modern real-estate developments with quality craftsmanship,
               transparent execution, and long-term value.
             </p>
