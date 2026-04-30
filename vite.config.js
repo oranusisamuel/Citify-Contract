@@ -7,6 +7,7 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [tailwindcss(), react(), sitemap({
     hostname: 'https://citify-contractors.com',
+    routes: ['/', '/about', '/services', '/projects', '/contact', '/blog', '/events']
   })],
   build: {
     chunkSizeWarningLimit: 900,
