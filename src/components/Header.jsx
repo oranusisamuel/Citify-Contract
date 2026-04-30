@@ -234,7 +234,7 @@ const Header = () => {
                 src={assets.brand_img}
                 alt={`${COMPANY.shortName} overview`}
                 skeletonClass='w-full sm:w-1/2 max-w-lg'
-                className='block w-full h-auto'
+                className='block w-full h-auto '
               />
               <div className='flex flex-col items-center md:items-start mt-10 text-gray-600'>
                   <div ref={statsRef} className='grid grid-cols-2 gap-6 md:gap-10 w-full 2xl:pr-28'>
@@ -311,7 +311,7 @@ const Header = () => {
       </motion.div>
 
       {/* Testimonials Section */}
-      <motion.div
+      {/* <motion.div
         initial='hidden'
         whileInView='visible'
         viewport={viewportOnce}
@@ -375,7 +375,7 @@ const Header = () => {
           ))}
         </div>
 
-      </motion.div>
+      </motion.div> */}
 
       {/* FAQ Section */}
       <motion.div

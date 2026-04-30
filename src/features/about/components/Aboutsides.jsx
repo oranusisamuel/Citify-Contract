@@ -215,7 +215,7 @@ const Aboutsides = () => {
                 {coreValues.map((value, index) => {
                   const Icon = value.icon
                   return (
-                    <motion.div key={value.title} variants={item} className="flex items-center gap-3 rounded-xl border border-brand/20 bg-white/80 px-3 py-2 md:shrink-0 md:border-0 md:bg-transparent md:px-0 md:py-0">
+                    <motion.div key={value.title} variants={item} className="flex items-center gap-3 rounded-xl border border-brand/20 bg-white/80 px-3 py-2 md:shrink-0 md:border-0 md:bg-transparent md:px-0 md:py-0 ">
                       <div className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-brand/40 bg-brand/10 text-brand">
                         <Icon size={19} strokeWidth={2.2} />
                       </div>

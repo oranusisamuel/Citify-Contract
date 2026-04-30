@@ -198,16 +198,16 @@ const Projects = () => {
                   </div>
                 </div>
 
-                <div className='flex flex-1 flex-col px-6 pb-6 pt-4'>
+                <div className='flex flex-1 flex-col px-5 pb-6 pt-4 md:px-2 lg:px-5'>
                   <div className='flex flex-col items-start gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4'>
                     <div>
                       <h2 className='text-xl sm:text-2xl font-semibold text-slate-900 wrap-break-word'>{project.title}</h2>
                       <div className='mt-2 flex items-center gap-2 text-sm text-slate-500'>
                         <MapPin size={15} className='text-brand' />
-                        <span className='wrap-break-word'>{project.location}</span>
+                        <span className=''>{project.location}</span>
                       </div>
                     </div>
-                    <span className='shrink-0 whitespace-nowrap rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-brand'>
+                    <span className='shrink-0 whitespace-nowrap rounded-full bg-brand/10 px-2 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-brand md:px-0 lg:px-2'>
                       Inspection Ready
                     </span>
                   </div>
