@@ -2,7 +2,7 @@ import React from 'react'
 import { assets } from '../assets'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa'
 import { makeFadeUp, makeStaggerContainer, useMotionSettings, viewportOnce } from '../shared/lib/motion'
 import { COMPANY, SOCIAL_LINKS } from '../shared/config/siteConfig'
 
@@ -14,7 +14,7 @@ const Footer = () => {
     Facebook: <FaFacebookF />,
     Instagram: <FaInstagram />,
     LinkedIn: <FaLinkedinIn />,
-    'X (Twitter)': <FaTwitter />,
+    WhatsApp: <FaWhatsapp />,
   }
 
   return (
@@ -28,7 +28,7 @@ const Footer = () => {
       >
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10'>
           <motion.div variants={fadeUp}>
-            <img src={assets.logo_dark} alt={`${COMPANY.name} logo`} className='h-10 w-auto' />
+            <img src={assets.citify_logo} alt={`${COMPANY.name} logo`} className='h-10 w-auto' />
             <p className='mt-4 text-sm leading-relaxed text-slate-400'>
               We design and deliver modern real-estate developments with quality craftsmanship,
               transparent execution, and long-term value.

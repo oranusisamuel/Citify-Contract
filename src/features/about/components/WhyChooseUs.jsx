@@ -82,7 +82,6 @@ const WhyChooseUs = () => (
   <section className="bg-white py-16 px-6 w-full" id="why-choose-us">
     <div className="max-w-7xl mx-auto rounded-4xl border border-slate-800 bg-slate-900 px-6 py-12 text-center shadow-[0_24px_70px_rgba(15,23,42,0.18)] sm:px-8 md:px-10 md:py-14">
       <div className="mb-12">
-        <span className="inline-block text-sm text-brand bg-brand/10 px-4 py-1 rounded-full tracking-wide mb-4">Reasons</span>
         <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Why Choose Us?</h2>
         <p className="text-gray-400 max-w-2xl mx-auto leading-relaxed">We combine experience, innovation, and reliability to deliver exceptional real estate solutions that drive growth and long-term value.</p>
       </div>

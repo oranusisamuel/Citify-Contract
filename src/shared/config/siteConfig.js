@@ -26,9 +26,9 @@ export const SOCIAL_LINKS = [
     href: 'https://www.linkedin.com/company/citify-contractors',
   },
   {
-    name: 'X (Twitter)',
-    handle: '@citifycontractors',
-    href: 'https://twitter.com/citifycontractors',
+    name: 'WhatsApp',
+    handle: '+234 000 000 0000',
+    href: 'https://wa.me/2340000000000',
   },
 ]
 

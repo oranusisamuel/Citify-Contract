@@ -2,7 +2,7 @@ import React from 'react'
 import { assets } from '../../assets'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa'
 import { makeFadeUp, makeStaggerContainer, useMotionSettings, viewportOnce } from '../lib/motion'
 import { COMPANY, SOCIAL_LINKS } from '../config/siteConfig'
 
@@ -14,7 +14,7 @@ const Footer = () => {
     Facebook: <FaFacebookF />,
     Instagram: <FaInstagram />,
     LinkedIn: <FaLinkedinIn />,
-    'X (Twitter)': <FaTwitter />,
+    WhatsApp: <FaWhatsapp />,
   }
 
   return (

@@ -50,8 +50,11 @@ service cloud.firestore {
       // Public listing access
       allow read: if true;
 
-      // Admin-only writes
-      allow create, update, delete: if isAdmin()
+      // Admin-only deletes
+      allow delete: if isAdmin();
+
+      // Admin-only create/update with strict payload validation
+      allow create, update: if isAdmin()
         && isString(request.resource.data.id)
         && isString(request.resource.data.title)
         && request.resource.data.title.size() >= 3
@@ -135,8 +138,11 @@ service cloud.firestore {
       // Public can read only published posts
       allow read: if isAdmin() || (resource.data.status == 'published');
 
+      // Admin-only deletes
+      allow delete: if isAdmin();
+
       // Admin-only blog management
-      allow create, update, delete: if isAdmin()
+      allow create, update: if isAdmin()
         && isString(request.resource.data.id)
         && isString(request.resource.data.title)
         && request.resource.data.title.size() >= 5
@@ -166,8 +172,11 @@ service cloud.firestore {
       // Public can only read published events, admins can read all
       allow read: if isAdmin() || (resource.data.status == 'published');
 
+      // Admin-only deletes
+      allow delete: if isAdmin();
+
       // Admin-only event management
-      allow create, update, delete: if isAdmin()
+      allow create, update: if isAdmin()
         && isString(request.resource.data.title)
         && request.resource.data.title.size() >= 3
         && request.resource.data.title.size() <= 150

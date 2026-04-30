@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa'
 import { makeFadeUp, makeStaggerContainer, useMotionSettings, viewportOnce } from '../shared/lib/motion'
 import { COMPANY, SOCIAL_LINKS } from '../shared/config/siteConfig'
 import { useContactRequestForm } from '../features/contacts/hooks/useContactRequestForm'
@@ -23,7 +23,7 @@ const Contact = () => {
     Facebook: <FaFacebookF />,
     Instagram: <FaInstagram />,
     LinkedIn: <FaLinkedinIn />,
-    'X (Twitter)': <FaTwitter />,
+    WhatsApp: <FaWhatsapp />,
   }
 
   return (
