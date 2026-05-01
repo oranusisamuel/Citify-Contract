@@ -113,7 +113,7 @@ exports.observabilityIngest = onRequest(
     invoker: 'public',
     maxInstances: 25,
     memory: '256MiB',
-    timeoutSeconds: 10,
+    timeoutSeconds: 30,
   },
   async (req, res) => {
     if (req.method === 'OPTIONS') {
