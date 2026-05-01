@@ -103,13 +103,13 @@ const Aboutsides = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 grid md:grid-cols-2 gap-10 items-center"
+          className="mx-auto grid max-w-7xl gap-10 px-6 md:grid-cols-2 md:items-start md:px-12 lg:px-20"
         >
           <motion.div
             variants={item}
-            className="w-full h-96 rounded-2xl overflow-hidden"
+            className="h-80 w-full shrink-0 overflow-hidden rounded-2xl sm:h-96 md:h-112 lg:h-128 xl:h-136"
           >
-            <LazyImage src={assets.mission_img} alt="Our Mission" className="w-full h-full object-cover" sizes='(max-width: 768px) 100vw, 50vw' />
+            <LazyImage src={assets.mission_img} alt="Our Mission" className="h-full w-full object-cover" sizes='(max-width: 768px) 100vw, 50vw' />
           </motion.div>
 
           <div className="space-y-8">
@@ -126,7 +126,7 @@ const Aboutsides = () => {
       </section>
 
       <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 grid md:grid-cols-2 gap-10 items-center">
+        <div className="mx-auto grid max-w-7xl gap-10 px-6 md:grid-cols-2 md:items-start md:px-12 lg:px-20">
           <motion.div
             variants={slideLeft}
             initial="hidden"
@@ -147,9 +147,9 @@ const Aboutsides = () => {
             whileInView={{ clipPath: 'inset(0% 0% 0% 0% round 1rem)' }}
             transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
             viewport={{ once: true }}
-            className="w-full h-96 rounded-2xl overflow-hidden"
+            className="h-80 w-full shrink-0 overflow-hidden rounded-2xl sm:h-96 md:h-112 lg:h-128 xl:h-136"
           >
-            <LazyImage src={assets.story_img} alt="Our Story" className="w-full h-full object-cover" sizes='(max-width: 768px) 100vw, 50vw' />
+            <LazyImage src={assets.story_img} alt="Our Story" className="h-full w-full object-cover" sizes='(max-width: 768px) 100vw, 50vw' />
           </motion.div>
         </div>
       </section>
@@ -193,7 +193,7 @@ const Aboutsides = () => {
       </section>
 
       <section className="py-20">
-        <div className="max-w-375 mx-auto px-4 md:px-8 lg:px-10">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
           <motion.div
             initial="hidden"
             whileInView="show"
@@ -210,22 +210,23 @@ const Aboutsides = () => {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-3 md:flex md:flex-nowrap md:items-center md:justify-start lg:justify-center md:gap-x-8 md:overflow-x-auto md:pb-2"
+                className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-4 sm:gap-x-8 md:gap-x-10"
               >
-                {coreValues.map((value, index) => {
+                {coreValues.map((value) => {
                   const Icon = value.icon
                   return (
-                    <motion.div key={value.title} variants={item} className="flex items-center gap-3 rounded-xl border border-brand/20 bg-white/80 px-3 py-2 md:shrink-0 md:border-0 md:bg-transparent md:px-0 md:py-0 ">
-                      <div className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-brand/40 bg-brand/10 text-brand">
+                    <motion.div
+                      key={value.title}
+                      variants={item}
+                      className="flex max-w-full min-w-0 items-center gap-3 rounded-xl border border-brand/20 bg-white/80 px-3 py-2 md:border-0 md:bg-transparent md:px-0 md:py-0"
+                    >
+                      <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-brand/40 bg-brand/10 text-brand">
                         <Icon size={19} strokeWidth={2.2} />
                       </div>
-                      <p className="text-lg md:text-xl font-semibold tracking-tight whitespace-nowrap">
+                      <p className="min-w-0 text-lg font-semibold tracking-tight sm:text-xl">
                         <span className="text-brand">{value.letter}</span>
                         <span className="text-slate-800"> - {value.title}</span>
                       </p>
-                      {index < coreValues.length - 1 && (
-                        <span className="hidden xl:inline-block h-6 w-px bg-slate-300 ml-2" aria-hidden="true" />
-                      )}
                     </motion.div>
                   )
                 })}

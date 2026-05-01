@@ -1,6 +1,25 @@
 {
-  "rewrites": [
-    { "source": "/sitemap.xml", "destination": "/sitemap.xml" },
-    { "source": "/(.*)", "destination": "/" }
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "citifycontractors.com" }],
+      "destination": "https://citify-contractors.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.citifycontractors.com" }],
+      "destination": "https://citify-contractors.com/$1",
+      "permanent": true
+    }
+  ],
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "^/$", "dest": "/index.html" },
+    { "src": "^/(about|properties|events|blog|contact|privacy-policy)$", "dest": "/index.html" },
+    { "src": "^/property/[^/]+$", "dest": "/index.html" },
+    { "src": "^/blog/[^/]+$", "dest": "/index.html" },
+    { "src": "^/admin/(login|properties|blog|tours|contacts)$", "dest": "/index.html" },
+    { "src": "^(.*)$", "status": 404, "dest": "/404.html" }
   ]
 }

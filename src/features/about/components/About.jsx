@@ -41,15 +41,17 @@ const About = () => {
       <motion.div variants={fadeUp} className='flex flex-col items-center container mx-auto p-8 sm:p-14 md:px-20 lg:px-32 w-full bg-white text-black' id='About'>
         <h1 className='text-2xl sm:text-4xl font-bold mb-2'>About <span className='underline underline-offset-4 decoration-1 font-light'>{COMPANY.shortName}</span></h1>
         <p className='text-gray-500 max-w-80 text-center mb-8'>Passionate about connecting investors and families with premium properties, delivering exceptional real estate solutions that exceed expectations and create lasting value.</p>
-        <div className='flex flex-col md:flex-row items-center md:items-start md:gap-20'>
-          <LazyImage
-            src={assets.brand_img}
-            alt={`${COMPANY.shortName} overview`}
-            skeletonClass='w-full sm:w-1/2 max-w-lg'
-            className='block w-full h-auto'
-            sizes='(max-width: 768px) 100vw, 50vw'
-          />
-          <div className='flex flex-col items-center md:items-start mt-10 text-gray-600'>
+        <div className='flex flex-col gap-10 md:flex-row md:items-start md:gap-12 lg:gap-16 xl:gap-20'>
+          <div className='mx-auto w-full max-w-xl shrink-0 md:mx-0 md:max-w-none md:w-1/2'>
+            <LazyImage
+              src={assets.brand_img}
+              alt={`${COMPANY.shortName} overview`}
+              skeletonClass='w-full'
+              className='block h-auto w-full'
+              sizes='(max-width: 768px) 100vw, 50vw'
+            />
+          </div>
+          <div className='flex w-full flex-col items-center text-gray-600 md:w-1/2 md:min-w-0 md:items-start'>
             <div ref={statsRef} className='grid grid-cols-2 gap-6 md:gap-10 w-full 2xl:pr-28'>
               {COMPANY_STATS.map((stat) => (
                 <div key={stat.key}>
