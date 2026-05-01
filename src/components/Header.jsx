@@ -265,7 +265,7 @@ const Header = () => {
         >
           <div className='rounded-4xl border border-brand/15 bg-[radial-gradient(circle_at_top_left,rgba(5,143,68,0.12),transparent_35%),linear-gradient(180deg,#f7fcf9_0%,#ffffff_62%)] p-6 sm:p-8 shadow-[0_20px_50px_rgba(15,23,42,0.08)]'>
             <h1 className='text-2xl sm:text-4xl font-bold mb-2 text-center'>Featured <span className='underline underline-offset-4 decoration-1 font-light'>Properties</span></h1>
-            <p className='text-center text-slate-600 mb-8 max-w-2xl mx-auto'>Explore high-potential land listings in fast-growing locations, curated for serious buyers and smart investors.</p>
+            <p className='text-center text-slate-600 mb-8 max-w-2xl mx-auto'>Explore high-potential listings in fast-growing locations, curated for serious buyers and smart investors.</p>
 
             <div className='flex justify-center items-center gap-3 mb-5'>
               <button onClick={previousProject} className='bg-white border border-slate-200 p-2.5 rounded-full hover:bg-slate-50 transition-colors shadow-sm'><img src={assets.left_arrow} alt='Previous' className='w-4 h-4'/></button>

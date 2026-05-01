@@ -59,7 +59,7 @@ const Footer = () => {
 
           <motion.div variants={fadeUp}>
             <h3 className='text-white text-base font-semibold mb-4'>Social</h3>
-            <p className='text-sm text-slate-400 mb-4'>Follow our latest land developments and behind-the-scenes progress.</p>
+            <p className='text-sm text-slate-400 mb-4'>Follow our latest developments and behind-the-scenes progress.</p>
             <motion.div className='flex items-center gap-3' variants={staggerContainer}>
               {SOCIAL_LINKS.map((social) => (
                 <motion.a

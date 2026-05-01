@@ -69,7 +69,7 @@ const BlogPage = () => {
           <p className='text-xs font-semibold uppercase tracking-[0.2em] text-brand'>Market Insights</p>
           <h1 className='mt-3 text-3xl sm:text-4xl font-bold text-slate-900'>Real Estate Blog</h1>
           <p className='mt-3 max-w-2xl text-sm sm:text-base text-slate-600'>
-            Practical guides on land acquisition, due diligence, financing, and high-growth locations.
+            Practical guides on acquisition, due diligence, financing, and high-growth locations.
           </p>
 
           <div className='mt-6 mx-auto w-full max-w-xl'>

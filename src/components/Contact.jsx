@@ -37,7 +37,7 @@ const Contact = () => {
       >
         <div className='text-center mb-12'>
           <h1 className='text-3xl sm:text-5xl font-bold text-slate-900'>Let's Build Something <span className='text-brand'>Remarkable</span></h1>
-          <p className='text-slate-600 mt-3 max-w-2xl mx-auto'>Share your land interest, timeline, and acquisition goals. Our team will get back with a tailored solution for your property needs.</p>
+          <p className='text-slate-600 mt-3 max-w-2xl mx-auto'>Tell us about your property needs and timeline, and we will guide you through the entire acquisition process with expert support.</p>
         </div>
 
         <motion.div
@@ -50,7 +50,7 @@ const Contact = () => {
           <motion.div variants={fadeUp} className='lg:col-span-2 rounded-3xl bg-slate-900 text-white p-8 shadow-xl'>
             <p className='text-xs uppercase tracking-[0.2em] text-brand/70 font-semibold'>Direct line</p>
             <h2 className='text-2xl font-semibold mt-2'>Speak with our planning team</h2>
-            <p className='text-slate-300 mt-4 leading-relaxed'>From prime residential land to commercial plots, we guide you from first consultation to acquisition completion.</p>
+            <p className='text-slate-300 mt-4 leading-relaxed'>From prime residential properties to commercial plots, we guide you from first consultation to acquisition completion.</p>
 
             <div className='mt-8 space-y-4 text-sm'>
               <div className='rounded-xl bg-white/10 border border-white/15 p-4'>
