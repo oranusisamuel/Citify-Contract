@@ -2,7 +2,7 @@ export const COMPANY = {
   name: 'Citify Contractors',
   shortName: 'Citify',
   email: 'citifycontractorsltd@gmail.com',
-  phone: '+234 09067642006',
+  phone: '+234 9067642006',
   address: 'Abuja, Nigeria',
   officeHours: 'Mon - Fri, 10:00 AM - 5:00 PM',
 }

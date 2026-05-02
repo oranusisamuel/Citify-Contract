@@ -3,7 +3,7 @@ import sitemap from 'vite-plugin-sitemap'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
-const STATIC_PUBLIC_ROUTES = ['/about', '/properties', '/events', '/blog', '/contact', '/privacy-policy']
+const STATIC_PUBLIC_ROUTES = ['/about', '/properties', '/events', '/blog', '/contact']
 const GOOGLE_SITE_VERIFICATION_PATH = '/google6c44fab17a62d8e5'
 
 const decodeFirestoreValue = (value = {}) => {

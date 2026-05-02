@@ -28,7 +28,7 @@ const PrivacyPolicyPage = () => {
           <div className='rounded-3xl border border-slate-200 bg-white px-8 py-10 shadow-[0_10px_40px_rgba(15,23,42,0.06)] sm:px-12'>
 
             <p className='text-slate-600 leading-relaxed mb-10'>
-              {COMPANY.name} (&ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) is committed to protecting your personal information and your right to privacy.
+              {COMPANY.name} is committed to protecting your personal information and your right to privacy.
               This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or contact us regarding our real estate services.
               Please read this policy carefully. If you disagree with its terms, please discontinue use of the site.
             </p>
@@ -65,12 +65,7 @@ const PrivacyPolicyPage = () => {
             </Section>
 
             <Section title='4. Disclosure of Your Information'>
-              <p>We may share your data with trusted third-party providers who assist in operating our website and delivering our services, including:</p>
-              <ul className='list-disc pl-5 space-y-1'>
-                <li><strong>Google Firebase / Firestore</strong> — for secure database storage of contact and inspection requests.</li>
-                <li><strong>Supabase</strong> — for media file storage.</li>
-                <li><strong>EmailJS</strong> — to deliver notification emails.</li>
-              </ul>
+              <p>We may share your data with trusted third-party providers who assist in operating our website and delivering our services</p>
               <p>These partners are contractually obligated to keep your data confidential and use it only for the services they provide to us.</p>
               <p>We may also disclose your information if required to do so by law or in response to valid requests by public authorities.</p>
             </Section>
